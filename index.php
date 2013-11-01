@@ -37,7 +37,6 @@
             <img style="width: 36px; heigth: 29px;" src="assets/images/logo-gray.png">
           </h2>
         </div>
-        
         <div class="span4">
           
           
