@@ -29,7 +29,7 @@
             <div class="row">
                 <a class="offset2 span6" id="forgot_pwd"
                 style="text-align:left;font-size:12px;color:#006600;display:none" 
-                href="#"> Olvid&oacute; su contrase&ntilde;a? </a>
+                href="#"> Olvid&oacute; su contrase&ntilde;a? NO HAY DE QUE PREOCUPARSE, HAGA CLICK AQU&Iacute;</a>
             </div>
         </div>
         <div class="modal-footer">
