@@ -101,7 +101,7 @@ if( $_GET['page']!='statistics' ){
       <i class="icon-print"></i>
     </a>
 
-    <a href="http://www.healmydisease.com/instrucciones/Instrucciones/instrucciones.html" 
+    <a href="../includes/instructions.php" 
      class="btn btn-inverse" style="font-family:'Oxygen',sans-serif;" >
       Ayuda
       <i class="icon-question-sign"></i>

@@ -68,7 +68,7 @@
             <a href="#modal_register" role="button" class="" data-toggle="modal" style="font-family:'Oxygen',sans-serif;">
               <b style="font-family: 'Oxygen', sans-serif;">Registrarse</b>
             </a>&nbsp; | &nbsp;
-            <a href="http://www.healmydisease.com/instrucciones/Instrucciones/instrucciones.html" 
+            <a href="modules/includes/instructions.php" 
              class="" style="font-family:'Oxygen',sans-serif;" > 
               <b style="font-family: 'Oxygen', sans-serif;"><b>Ayuda</b>
             </a>

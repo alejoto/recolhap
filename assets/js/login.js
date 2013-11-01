@@ -105,68 +105,35 @@ $(function(){
     }
 
 
-
-
-
     /*
-
     *
-
     *
-
     * ------------------------------------------------------------------------------
-
     * Function name:          No name
-
     * Description:            Trigghers "hap_login_method()" with enter key or 
-
     *                         #login button (modules/login/login.php)
-
     *                         If validation is right, executes ajax user
-
     *                         validation.
-
     * Depend on:              hap_login_method(), #login button on 
-
     *                         modules/login/login.php
-
     * Dependant:              
-
     */
-
     $("#login").click(function(){hap_login_method();});
-
     $("#pwd").keyup(function(event){if(event.keyCode == 13){hap_login_method();} });
 
-
-
     /*Triggering ajax for sending password to email*/
-
     $('#forgot_pwd').click(function(){
-
       $.post("modules/login/rememberpwd.php",{usr:$('#usr').val()}, function(data2){
-
         $("#msg").html(data2);
-
-      })
-
-    })
-
+      });
+    });
 
 
     /*-----end of login--------------------------------------------------------------*/
-
     /*-------------------------------------------------------------------------------*/
-
     /*-------------------------------------------------------------------------------*/
-
     /*-------------------------------------------------------------------------------*/
-
     /*-------------------------------------------------------------------------------*/
-
-
-
-
 
 
 
