@@ -74,6 +74,8 @@
     </form>
 
     <div class="span6 offset1" style="border-left: ridge; height: 560px; " >
+
+     
       <!-- ************************ -->
       <!-- First time patient       -->
       <div id="enterpatient">
@@ -123,75 +125,46 @@
 
 
           <div class="btn-group" id="group_save_patient" >
-
             <!--
-
             * button name:          save_patient
-
             * Triggers:             Submit form
-
             * Brieff description:   Save new patient data and create firs main_eval for this patient
-
             * js associated file:   None
-
             * php AJAX:             Post: ajax_save_patient.php
-
             -->
 
             <button type="submit" class="btn btn-info " id="save_patient" style="margin-left: 0px;">
-
               Guardar datos de paciente
-
               <i class="icon-circle-arrow-down"></i>
-
             </button>
-
             <!-- <button href="#" role="button" class="btn btn-info" style="">
-
              Datos adicionales 
-
              <i class="icon-plus-sign"></i>
-
            </button> -->
-
-
-
           </div>
-
-            
-
         </form>
-
       </div>
 
       <!-- End of First time patient-->
-
       <!-- ************************ -->
 
-
-
       <!-- ************************ -->
-
       <!-- Found patient (if exist) -->
-
       <div id="patientexist" style="padding-left: 70px; text-align: left; margin-top: 35px;">
-
       </div>
-
       <!-- end of "Found patient"   -->
-
       <!-- ************************ -->
-
-
-
+      <?php  
+      $link_to_all='../../recolhap_laravel/public/?doctor='.$_SESSION['username'];
+      
+      ?>
+      <a href="<?php echo $link_to_all; ?>" class='btn btn-link'>
+        <h3>VER TODOS SUS PACIENTES INGRESADOS</h3>
+      </a>
+      
     </div>
-
     <script src="../../assets/js/medic.js"></script>
-
     <script src="../../assets/js/patients.js"></script>
-
-
-
   </div>
 
 </div>

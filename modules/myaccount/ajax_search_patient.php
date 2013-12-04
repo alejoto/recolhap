@@ -77,15 +77,10 @@
     <!--
 
     * button name:          none
-
     * Triggers:             Link to
-
     * Brieff description:   Starts new eval. First step is create right catheter info.
-
     * js associated file:   None
-
     * php AJAX:             Href: start_eval_id.php
-
     -->
 
     <a style="margin-left: 10px;" href="start_eval_id.php" role="button" class="btn btn-success span11">
