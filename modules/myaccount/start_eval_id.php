@@ -1,7 +1,8 @@
 <?php 
-
-include '../DB/connect.php';
+ob_start();
 session_start();
+include '../DB/connect.php';
+
 if (!isset($_SESSION['hap_patient_id'])||!isset($_SESSION['username'])) { header("location:myaccount.php?page=patients"); }
 
 
