@@ -16,3 +16,9 @@ Route::get('/', function()
 	return View::make('index')
 	->with('title','wellcome');
 });
+
+Route::get('/help',function(){
+	return View::make('modules.includes.instructions');
+});
+
+Route::resource('patients','PatientsController');
