@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class LoggerDataCollector extends DataCollector
+class LoggerDataCollector extends DataCollector implements LateDataCollectorInterface
 {
     private $logger;
 
@@ -37,11 +37,19 @@ class LoggerDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
+        // everything is done as late as possible
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function lateCollect()
+    {
         if (null !== $this->logger) {
             $this->data = array(
                 'error_count'       => $this->logger->countErrors(),
                 'logs'              => $this->sanitizeLogs($this->logger->getLogs()),
-                'deprecation_count' => $this->computeDeprecationCount()
+                'deprecation_count' => $this->computeDeprecationCount(),
             );
         }
     }

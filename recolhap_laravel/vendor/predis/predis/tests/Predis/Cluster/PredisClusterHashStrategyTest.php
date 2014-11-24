@@ -11,15 +11,14 @@
 
 namespace Predis\Cluster;
 
-use \PHPUnit_Framework_TestCase as StandardTestCase;
-
+use PredisTestCase;
 use Predis\Cluster\Distribution\HashRing;
 use Predis\Profile\ServerProfile;
 
 /**
  *
  */
-class PredisClusterHashStrategyTest extends StandardTestCase
+class PredisClusterHashStrategyTest extends PredisTestCase
 {
     /**
      * @group disconnected
@@ -245,7 +244,7 @@ class PredisClusterHashStrategyTest extends StandardTestCase
     /**
      * Returns the list of expected supported commands.
      *
-     * @param string $type Optional type of command (based on its keys)
+     * @param  string $type Optional type of command (based on its keys)
      * @return array
      */
     protected function getExpectedCommands($type = null)
@@ -278,6 +277,7 @@ class PredisClusterHashStrategyTest extends StandardTestCase
             'GETSET'                => 'keys-first',
             'INCR'                  => 'keys-first',
             'INCRBY'                => 'keys-first',
+            'INCRBYFLOAT'           => 'keys-first',
             'SETBIT'                => 'keys-first',
             'SETEX'                 => 'keys-first',
             'MSET'                  => 'keys-interleaved',
@@ -342,6 +342,9 @@ class PredisClusterHashStrategyTest extends StandardTestCase
             'ZSCORE'                => 'keys-first',
             'ZUNIONSTORE'           => 'keys-zaggregated',
             'ZSCAN'                 => 'keys-first',
+            'ZLEXCOUNT'             => 'keys-first',
+            'ZRANGEBYLEX'           => 'keys-first',
+            'ZREMRANGEBYLEX'        => 'keys-first',
 
             /* commands operating on hashes */
             'HDEL'                  => 'keys-first',
@@ -358,6 +361,11 @@ class PredisClusterHashStrategyTest extends StandardTestCase
             'HSETNX'                => 'keys-first',
             'HVALS'                 => 'keys-first',
             'HSCAN'                 => 'keys-first',
+
+            /* commands operating on HyperLogLog */
+            'PFADD'                 => 'keys-first',
+            'PFCOUNT'               => 'keys-all',
+            'PFMERGE'               => 'keys-all',
 
             /* scripting */
             'EVAL'                  => 'keys-script',

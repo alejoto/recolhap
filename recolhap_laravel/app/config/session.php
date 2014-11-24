@@ -44,6 +44,8 @@ return array(
 
 	'files' => storage_path().'/sessions',
 
+	'expire_on_close'=>false,
+
 	/*
 	|--------------------------------------------------------------------------
 	| Session Database Connection
