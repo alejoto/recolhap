@@ -5,12 +5,16 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
+
+	public function investigator () {
+		return $this->hasOne('Investigator','user_id','email');
+	}
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'userdoctors';
 
 	/**
 	 * The attributes excluded from the model's JSON form.

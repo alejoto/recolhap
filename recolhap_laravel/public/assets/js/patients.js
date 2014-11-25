@@ -91,29 +91,16 @@ function enter_search (){
 					$("#the_sick_citybth").text(d.citybth);
 					$("#the_sick_statebth").text(d.statebth);
 					$("#the_sick_digiter_id").text(d.digiter_id);
+					//$("a").attr("href", "http://www.google.com/")
+					$('#start_patient_register').attr(
+						'href',
+						base+'/patients/patient/'+d.patient_id
+						)
+					;
 
 					$("#patientexist").show("fast");
 					$("#enterpatient").hide("fast");
 				}
-				//$("#patientexist").show("fast");
-				//$("#patientexist").html(d.check);
-			/*
-				if (d=='cc0') {
-					$("#patientexist").hide("fast");
-				} 
-				else if (d=='cc1') {
-					$("#patientexist").show("fast");
-				}
-				//$('#patientexist').html(data);
-				//$("#patientexist").show("fast");
-
-				/*if(data=='no') {
-					$("#enterpatient").show("fast");
-					$("#patientexist").hide("fast");
-				}else{
-					$("#enterpatient").hide("fast");
-					$("#patientexist").show("fast");
-				}/**/
 
 			});
 	}

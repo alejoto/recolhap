@@ -14,7 +14,7 @@
 Route::get('/', function()
 {
 	return View::make('index')
-	->with('title','wellcome');
+	->with('title','welcome');
 });
 
 Route::controller('login','LoginController');
@@ -27,14 +27,7 @@ Route::group(
 	array('before' => 'auth'), 
 	function() {
 		Route::controller('patients','PatientsController');
-		//Route::get('patients/page/{page}','PatientsController@page');
-		/*Route::get('myaccount.php',
-			function(){
-				return View::make('modules.myaccount.myaccount');
-			}
-			)
-		;*/
-		//Route::resource('patients','PatientsController');
+		Route::controller('tables','TablesController');
 	}
 	)
 ;

@@ -33,8 +33,59 @@ class PatientsController extends \BaseController {
 		//return $r;
 	}
 
-	public function getPage ($page) {
+	public function postStore () {
+		$id=Input::get('docidnum');
+		$check=Patient::find($id);
+		if ($check!=null) {
+			return Redirect::to('patients/exists/');
+		} else {
+			//
+			$e=new Patient;
+			$e->patient_id	=Input::get('docidnum');
+			$e->name		=Input::get('name');
+			$e->surn		=Input::get('surname');
+			$e->gender		=Input::get('gender');
+			$e->birthd		=date(
+				'Y-m-d',mktime(
+					0,0,0,
+					Input::get('month'),
+					Input::get('day'),
+					Input::get('year')
+					)
+			)
+			;//$birthd	;
+			$e->countrybth	=Input::get('countrybth');
+			$e->citybth		=Input::get('citybth');
+			$e->statebth	=Input::get('statebth');
+			$e->digiter_id	=Auth::user()->email;
+			$e->save();
+
+			return Redirect::to(
+				'patients/patient/'.Input::get('docidnum')
+				)
+			;
+		}
+	}
+
+	public function getAllpatients () {
 		
+	}
+
+	public function getPatient ($patient) {
+		$p=Patient::find($patient);
+		if ($p==null) {
+			return Redirect::to('allpatients');
+		} else {
+			return View::make(
+				'patients.show',
+				compact(
+					'patient',
+					'p'
+					)
+				)
+			;
+		}
+			
 	}
 
 	/**
@@ -54,10 +105,10 @@ class PatientsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	/*public function create()
 	{
 		//
-	}
+	}*/
 
 	/**
 	 * Store a newly created resource in storage.
@@ -65,10 +116,10 @@ class PatientsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	/*public function store()
 	{
 		//
-	}
+	}*/
 
 	/**
 	 * Display the specified resource.
@@ -77,10 +128,10 @@ class PatientsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	/*public function show($id)
 	{
 		//
-	}
+	}*/
 
 	/**
 	 * Show the form for editing the specified resource.

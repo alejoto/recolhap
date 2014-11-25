@@ -62,7 +62,7 @@
 						CARDIACO DERECHO para ingresar cualquier dato cl&iacute;nico
 					</h5>
 				</div>
-				<form action="" class="pt_enter_form">
+				<form action="{{URL::to('patients/store')}}" class="pt_enter_form" method='POST'>
 					<input type="text" id="docidnum" name="docidnum">
 					<input type="text" id="name" name="name" placeholder="Nombre completo">(*)<br>
 					<input type="text" id="surname" name="surname" placeholder="Apellidos">(*)<br>
@@ -81,18 +81,21 @@
 							<input type="text" id="year" name="year" placeholder="A&ntilde;o" class="span3"  maxlength="4">
 							<input type="text" id="month" name="month" placeholder="Mes" class="span3" maxlength="2">
 							<input type="text" id="day" name="day" placeholder="D&iacute;a" class="span3" maxlength="2">
-							<input type="text" id="wholedate" name="wholedate"  style="display:none">(*)
+							(*)
 						</div>
 					</div>
 					<input type="text" id="citybth" name="citybth" placeholder="Ciudad nacimiento">(*)<br>  
 					<input type="text" id="statebth" name="statebth" placeholder="Departamento">(*)<br>
 					<input type="text" id="countrybth" name="countrybth" placeholder="Pa&iacute;s de origen">(*)
-					<br><br>
+					<br>
+					DEBE LLENAR TODOS LOS CAMPOS O DE LO CONTRARIO EL BOT&Oacute;N DE GUARDAR NO APARECER&Aacute;
+					<br>
 					<div class="btn-group" id="group_save_patient">
 						<button type="submit" class="btn btn-info pnt_ctrl2" id="save_patient">
 							Guardar datos de paciente
 							<i class="icon-circle-arrow-down"></i>
 						</button>
+						<br><br>
 						<br><br>
 					</div>
 				</form>
@@ -146,10 +149,8 @@
 						</div>
 					</div>
 				</div>
-				<a href="" class='btn btn-link'>Ir al registro</a>
+				<a href="" id='start_patient_register' class='btn btn-link'>Ir al registro</a>
 			</div>
-				
-				
 		</div>
 		
 		<h3>

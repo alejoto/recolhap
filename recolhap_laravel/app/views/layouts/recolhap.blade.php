@@ -19,7 +19,21 @@
 	</head>
 	<body class='recolhap-intro'>
 		<div class='hide'  id='base'>{{URL::to('/')}}</div>
+		<!-- 
+		| header above
+		|
+		|
+		|
+		|
+		| -->
 		@yield('content')
+		<!-- 
+		|
+		|
+		|
+		|
+		| Footer below
+		| -->
 		
 		 
 	</body>

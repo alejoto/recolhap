@@ -50,11 +50,33 @@
 					</div>
 				</div>
 				<div class="span3 doctor_name">
-					<a href="{{URL::to('userdata')}}" data-toggle="tooltip" title="Editar perfil" data-placement="bottom">doctor </a>
+					<a href="{{URL::to('userdata')}}" data-toggle="tooltip" title="Editar perfil" data-placement="bottom">HOLA DR.
+						{{Auth::user()->investigator->ivt_name}} 
+						({{Auth::user()->investigator->ivt_specialty}})
+					 </a>
 				</div>
 			</div>
 		</div>
+		<!-- 
+		| header is before
+		|
+		|
+		main content
+		|
+		|
+		|
+		 -->
 		@yield('content')
+
+		<!-- 
+		|
+		|
+		|
+		main content
+		|
+		|
+		| footer is below
+		 -->
 		<div id="footer">
 			<div class="row-fluid">
 				<div class="span6">
