@@ -73,3 +73,6 @@
 		</div>
 	</body>
 </html>
+{{HTML::script('assets/js/jquery.min.js');}}
+{{HTML::script('assets/js/bootstrap.min.js');}}
+@yield('scripts')

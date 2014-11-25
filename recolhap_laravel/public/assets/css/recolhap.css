@@ -17,7 +17,7 @@
 .recolhap_head_img{
 	/**/
 	max-width: 30px; 
-	max-heigth: 23px;
+	max-height: 23px;
 	padding-left: 15px;
 }
 
@@ -36,4 +36,85 @@
 	height: 23px; 
 	opacity: 0.7; 
 	margin-top: 0px auto;
+}
+
+.patient_form{
+	text-align: left; 
+	margin-top: 30px;
+}
+
+.patient_form2{
+	height: 250px; 
+	margin-top: 10px; 
+	margin-bottom: -30px; 
+	margin-left: 5px;
+}
+
+.patient_title2{
+	color: #CC0000; 
+	font-family: 'Play', sans-serif; 
+	font-weight: 700;
+}
+
+.patient_img1{
+	max-width:100px; 
+	max-height: 82px; 
+	opacity:0.7; 
+	margin-top:0px auto;
+}
+
+.patient_paragraph{
+	color: #686868; 
+	font-family: 'Oxygen', sans-serif; 
+	font-weight: 700;
+}
+
+.patient_select{
+	margin-left: 20px;
+}
+
+.pnt_ctrl{
+	width: 300px;
+}
+
+.pnt_ctrl2{
+	margin-left: 0px;
+}
+
+.ptn_right1{
+	border-left: ridge; 
+	height: 560px;
+}
+
+.ptn_new{
+	border: none; 
+	padding-left: 70px;
+}
+
+.pt_enter{
+	margin-left: 30px; 
+	margin-top: -15px;
+}
+
+.pt_enter_form{
+	padding-left: 70px; 
+	text-align: center; 
+	margin-top: 40px;
+}
+
+.pt_bthday{
+	padding-left:105px;
+	text-align:left;
+	color:#333333;
+}
+
+.btd_detail{
+	padding-left:105px;
+	text-align:left;
+}
+
+.pt_exists{
+	padding-left: 70px; 
+	text-align: left; 
+	margin-top: 35px;
 }

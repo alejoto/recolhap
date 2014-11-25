@@ -1,13 +1,118 @@
 @extends('layouts.main')
 @section('content')
 
-list of patients filtered by logged doctor
-
-Welcome doctor X
-
-Patients you are currently following up:
- - peter
- - pan
- - jack
- - canguro
+<div class="container" id='parent_patient_forms'>
+	<div class="row-fluid">
+		<form action="" class="form-horizontal span5 patient_form" onsubmit="return false">
+			<div class="patient_form2">
+				<center>
+					<h2 class="patient_title2">RECOLHAP</h2>
+					<br>
+					<img src="../../assets/images/logo.png" class='patient_img1'>
+					<br>
+					<p class="patient_paragraph">
+						<br>
+						Registro Multic&eacute;ntrico Colombiano
+				        <br>
+				        de Hipertensi&oacute;n Arterial Pulmonar
+					</p>
+				</center>
+				<br>
+			</div>
+			<blockquote>
+				<p>Selecciona tipo y n&uacute;mero de documento:</p>
+			</blockquote>
+			<br>
+			<div class="patient_select">
+				<div class="control-group pnt_ctrl">
+					<div class="controls pnt_ctrl2">
+						<div id="idtypectr" class="input-prepend">
+							<span class="add-on"><i class="icon-list-alt"></i></span>
+							<select name="docid" id="docid">
+								<option value="" >Tipo documento</option>
+								<option value="cc">C&eacute;dula</option>
+								<option value="rc">Registro Civil</option>
+								<option value="ti">Tarjeta de Identidad</option>
+								<option value="ce">C&eacute;dula Extranjera</option>
+								<option value="pas">Pasaporte</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="control-group pnt_ctrl">
+					<label class="control-label" for="idnumber"></label>
+					<div class="controls pnt_ctrl2">
+						<div id="idnumberctr" class="input-prepend input-append">
+							<span class="add-on"><i class="icon-user"></i></span>
+							<input type="text" id="idnumber" placeholder="N&uacute;mero identidad"/>
+							<button class="btn" type="button"> <i class="icon-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="span6 offset1 ptn_right1">
+			<div id="enterpatient">
+				<div class="page-header ptn_new"></div>
+				<div class="alert alert-info fade in pt_enter">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					Ingrese PACIENTE NUEVO o verifique documento.
+					<h5>
+						Luego de registrar paciente es obligatorio ingresar los resultados del CATETERISMO 
+						CARDIACO DERECHO para ingresar cualquier dato cl&iacute;nico
+					</h5>
+				</div>
+				<form action="" class="pt_enter_form">
+					<input type="text" id="docidnum" name="docidnum">
+					<input type="text" id="name" name="name" placeholder="Nombre completo">(*)<br>
+					<input type="text" id="surname" name="surname" placeholder="Apellidos">(*)<br>
+					<select id="gender" name="gender">
+						<option value="">G&eacute;nero</option>
+						<option value="male">Hombre</option>
+						<option value="female">Mujer</option>
+					</select>(*)<br>
+					<div class="row">
+						<div class="span12 pt_bthday">
+							Fecha nacimiento (aaaa/mm/dd)
+						</div>
+					</div>
+					<div class="row">
+						<div class="span12 btd_detail">
+							<input type="text" id="year" name="year" placeholder="A&ntilde;o" class="span3"  maxlength="4">
+							<input type="text" id="month" name="month" placeholder="Mes" class="span3" maxlength="2">
+							<input type="text" id="day" name="day" placeholder="D&iacute;a" class="span3" maxlength="2">
+							<input type="text" id="wholedate" name="wholedate"  style="display:none">(*)
+						</div>
+					</div>
+					<input type="text" id="citybth" name="citybth" placeholder="Ciudad nacimiento">(*)<br>  
+					<input type="text" id="statebth" name="statebth" placeholder="Departamento">(*)<br>
+					<input type="text" id="countrybth" name="countrybth" placeholder="Pa&iacute;s de origen">(*)
+					<br><br>
+					<div class="btn-group" id="group_save_patient">
+						<button type="submit" class="btn btn-info pnt_ctrl2" id="save_patient">
+							Guardar datos de paciente
+							<i class="icon-circle-arrow-down"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+			<div id="patientexist" class="pt_exists"></div>
+				
+				
+		</div>
+		
+		<h3>
+			<a href="{{URL::to('allpatients')}}">
+				VER TODOS SUS PACIENTES INGRESADOS
+			</a>
+		</h3>
+	</div>
+</div>
 @stop 
+
+@section('scripts')
+
+{{HTML::script('assets/js/medic.js');}}
+{{HTML::script('assets/js/patients.js');}}
+
+@stop
