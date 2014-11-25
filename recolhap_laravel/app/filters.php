@@ -22,6 +22,16 @@ App::after(function($request, $response)
 	//
 });
 
+Route::filter('page',function($route,$request){
+	if (null==($route->getParameter('page') )) {
+		return  Redirect::to('/');
+	}
+	/*$page=$route->getParameter('page');
+	if ($page=='') {
+		return  Redirect::to('/');
+	}*/
+});
+
 /*
 |--------------------------------------------------------------------------
 | Authentication Filters
@@ -35,7 +45,7 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::guest()) return Redirect::guest('/');
 });
 
 

@@ -30,8 +30,7 @@
           <a class="brand" href="#">INSTRUCCIONES</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-            	<a href="../myaccount/myaccount.php?page=basic" 
-            	class="navbar-link">Volver a RECOLHAP</a>
+            	<a href="../">Volver a RECOLHAP</a>
             </p>
             <ul class="nav">
               <li><a href="#ingreso">Ingreso</a></li>

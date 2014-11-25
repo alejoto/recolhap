@@ -17,14 +17,11 @@
 		</div>
 		<div class="span4">
 			@if(Auth::check())
-				user is logged
-				<a href="">main page</a>
-				<?php 
-				echo '<a href="modules/myaccount/myaccount.php?page=patients"><u>'
-				.$_SESSION['username'].
-				'</u></a>';
-				echo '<a href="modules/login/logout.php" role="button" class="btn btn-danger left_space">Salir</a>';
-				?>
+				{{Auth::user()->email}}
+				 ha ingresado.
+				<a href="{{URL::to('patients')}}" class='btn oxygen'>principal</a>
+				<a href="{{URL::to('/login/logout')}}" class='btn btn-danger oxygen '>Salir</a>
+
 			@else 
 				<a href="#modal_login" id="button_modal" role="button"  data-toggle="modal">
 					<b class='oxygen' >Entrar </b>
@@ -36,7 +33,7 @@
 					<b class='oxygen'>Registrarse</b>
 				</a>&nbsp; | &nbsp;
 
-				<a href="modules/includes/instructions.php" class=""  > 
+				<a href="{{URL::to('help')}}" class=""  > 
 					<b class='oxygen'>Ayuda</b>
 				</a>
 				@include('modules.login.login')

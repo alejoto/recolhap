@@ -2,6 +2,25 @@
 
 class PatientsController extends \BaseController {
 
+	public function getIndex () {
+		return View::make('patients.index');
+		/*if (Input::has('page')) {
+			$page=Input::get('page');
+			return View::make(
+				'modules.myaccount.myaccount',
+				compact('page')
+				)
+			;
+		} else {
+			return Redirect::to('/patients?page=patient');
+		}*/
+		
+	}
+
+	public function getPage ($page) {
+		
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /patients

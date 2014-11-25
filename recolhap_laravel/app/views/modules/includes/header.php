@@ -21,7 +21,8 @@
 </head>
 <body>
   <?php 
-include '../DB/connect.php';
+//include '../DB/connect.php';
+  /*
 $user_id=$_SESSION['username'];
 $result_user = mysqli_query($con,"SELECT * FROM main_investigator WHERE user_id='$user_id'"  );  
 $row_user    = mysqli_fetch_array($result_user);
@@ -48,13 +49,20 @@ $row_user    = mysqli_fetch_array($result_user);
         Cambiar paciente 
         <i class="icon-user icon-white"></i>
       </a>
-      <?php } ?>
+
+
+
+
+      <?php //} 
+      ?>
       <?php
+      /*
       if( $_GET['page']=='statistics'&&isset($_SESSION['evaluation']) ){
         /*$_SESSION['evaluation'] is set at 'myaccount/start_eval_id.php' or 
         * 'myaccount/ajax_save_patient.php' and contains the eval_id value
         * during one unique register
         */
+        /*
       ?>
       <a class="btn btn-inverse" id="back_to_register_btn" href="myaccount.php?page=basic">
         Volver al registro 
@@ -74,13 +82,15 @@ $row_user    = mysqli_fetch_array($result_user);
     Seleccionar paciente 
     <i class="icon-user icon-white"></i>
   </a>
-  <?php } 
-else echo "";?>
+  <?php //} 
+//else echo "";
+?>
 <!-- <a class="btn btn-inverse" id="statistics_btn" href="../myaccount/myaccount.php?page=tables">
   Tablas
   <i class="icon-user icon-table"></i>
 </a> -->
 <?php
+/*
 if( $_GET['page']!='statistics' ){
 
   ?>
@@ -106,6 +116,7 @@ if( $_GET['page']!='statistics' ){
       Ayuda
       <i class="icon-question-sign"></i>
     </a>
+
     <a href="../login/logout.php" class="btn btn-inverse">Salir<i class="icon-share-alt icon-white"></i></a>
   </div>
 </div>   

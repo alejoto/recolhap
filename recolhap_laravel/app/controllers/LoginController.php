@@ -2,8 +2,21 @@
 
 class LoginController extends \BaseController {
 
-	public function login () {
+	public function postIndex () {
+
 		//
+		$email=$_POST['usr'];
+		$pwd=$_POST['pwd'];
+		if (Auth::attempt(array('email' => $email, 'password' => $pwd)))
+		{
+		    return 1;
+		}
+		return 0;
+	}
+
+	public function getLogout () {
+		Auth::logout();
+		return Redirect::to('/');
 	}
 
 	/**

@@ -1,0 +1,39 @@
+
+.recolhap_header1{
+	/**/
+	background:#3A3A3A;
+	color:#fff;
+	padding:10px;
+}
+
+.recolhap_play{
+	/**/
+	color: #C6C6AA; 
+	font-family: 'Play', cursive; 
+	font-weight: 700; 
+	font-size:120%;
+}
+
+.recolhap_head_img{
+	/**/
+	max-width: 30px; 
+	max-heigth: 23px;
+	padding-left: 15px;
+}
+
+.doctor_name{
+	color:gray;
+	padding-top:7px;
+}
+
+.recolhap_footer{
+	font-family: 'Oxygen', sans-serif; color: #C6C6AA;
+}
+
+.recolhap_bottom{
+	/***/
+	weight: 50px; 
+	height: 23px; 
+	opacity: 0.7; 
+	margin-top: 0px auto;
+}

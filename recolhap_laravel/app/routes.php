@@ -17,8 +17,25 @@ Route::get('/', function()
 	->with('title','wellcome');
 });
 
+Route::controller('login','LoginController');
+
 Route::get('/help',function(){
 	return View::make('modules.includes.instructions');
 });
 
-Route::resource('patients','PatientsController');
+Route::group(
+	array('before' => 'auth'), 
+	function() {
+		Route::controller('patients','PatientsController');
+		//Route::get('patients/page/{page}','PatientsController@page');
+		/*Route::get('myaccount.php',
+			function(){
+				return View::make('modules.myaccount.myaccount');
+			}
+			)
+		;*/
+		//Route::resource('patients','PatientsController');
+	}
+	)
+;
+

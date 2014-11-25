@@ -18,6 +18,7 @@
 		@yield('header')
 	</head>
 	<body class='recolhap-intro'>
+		<div class='hide'  id='base'>{{URL::to('/')}}</div>
 		@yield('content')
 		
 		 

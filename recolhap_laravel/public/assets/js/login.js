@@ -90,17 +90,27 @@ $(function(){
     //if no empty, run ajax
         else {
             $("#loading").show();
-            $.post("modules/login/ajax_login.php",{ usr:$('#usr').val(), pwd:$('#pwd').val() }, function(data) {
-                if(data==1) {
-                    document.location='modules/myaccount/myaccount.php?page=patients';
-                }else
-                {
-                    $("#msg").html("<label class='control-label' "
+            var base=$('#base').html();
+            /*$.post(base+'/',{},function(d){
+            	
+            });*/
+            $.post(
+            	base+'/login',
+            	//"modules/login/ajax_login.php",
+            	{ usr:$('#usr').val(), pwd:$('#pwd').val() },
+            	function(d) {
+                	if(d==1) {
+                		window.location.href=base+'/patients';
+
+                    	//document.location='modules/myaccount/myaccount.php?page=patients';
+                	} else { $("#msg").html("<label class='control-label' "
                         +"for='inputError'>Verifique usuario y contrase&ntilde;a. "
                         +"<br/>o reg&iacute;strese.</label>");
+                	}
+                	$("#loading").html(d);
                 }
-                $("#loading").hide();
-            });
+                )
+            ;
         }
     }
 
