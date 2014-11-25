@@ -12,6 +12,7 @@
 		@yield('header')
 	</head>
 	<body>
+		<div class='hide'  id='base'>{{URL::to('/')}}</div>
 		<div class="recolhap_header1">
 			<div class="row-fluid">
 				<div class="span3">

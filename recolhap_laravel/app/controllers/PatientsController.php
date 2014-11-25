@@ -4,17 +4,33 @@ class PatientsController extends \BaseController {
 
 	public function getIndex () {
 		return View::make('patients.index');
-		/*if (Input::has('page')) {
-			$page=Input::get('page');
-			return View::make(
-				'modules.myaccount.myaccount',
-				compact('page')
-				)
-			;
+	}
+
+	public function postIndex () {
+		$docid=Input::get('doc');
+		//doc structure: idtype in lowercase and numbers 
+		//with no space.  Example cc71786766
+		$p=Patient::find($docid);
+
+		if ($p==null) {
+			$r['check']=0;
+			return json_encode($r);
 		} else {
-			return Redirect::to('/patients?page=patient');
-		}*/
-		
+			$r['check']=1;
+			$r['patient_id']	=$p->patient_id;
+			//$r['timestamp']		=$p->timestamp;
+			$r['name']			=$p->name;
+			$r['surn']			=$p->surn;
+			$r['gender']		=$p->gender;
+			$r['birthd']		=$p->birthd;
+			$r['countrybth']	=$p->countrybth;
+			$r['citybth']		=$p->citybth;
+			//$r['statebth']		=$p->statebth;
+			$r['digiter_id']	=$p->digiter_id;
+
+			return json_encode($r);
+		}
+		//return $r;
 	}
 
 	public function getPage ($page) {
@@ -27,10 +43,10 @@ class PatientsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	/*public function index()
 	{
 		return View::make('patients.index');
-	}
+	}*/
 
 	/**
 	 * Show the form for creating a new resource.

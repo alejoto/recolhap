@@ -93,10 +93,61 @@
 							Guardar datos de paciente
 							<i class="icon-circle-arrow-down"></i>
 						</button>
+						<br><br>
 					</div>
 				</form>
 			</div>
-			<div id="patientexist" class="pt_exists"></div>
+			<div id="patientexist" class="pt_exists">
+				<br>
+				<br>
+				<br>
+				<br>
+				<div class="row alert alert-success">
+					<br>
+					<div class="span3">
+						<img src="{{URL::to('assets/images/male.png')}}" alt="" id="male">
+						<img src="{{URL::to('assets/images/female.png')}}" alt="" id="female">
+					</div>
+					<div class="span8">
+						<div class="row">
+							<div class="offset1 span10">
+								<h4>
+									<spam id="the_sick_name"></spam>
+									<spam id="the_sick_surn"></spam>
+								</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="offset1 span1">
+								documento <spam id="the_sick_patient_id"></spam>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="offset1 span11">
+							<hr>
+						</div>
+					</div>
+					<div class="row">
+						<div class="offset1 span6">
+							Fecha nto <spam id="the_sick_birthd"></spam>
+						</div>
+					</div>
+					<div class="row">
+						<div class="offset1 span5">
+							Nacionalidad
+							<br>
+							<spam id="the_sick_countrybth"></spam>
+						</div>
+						<div class="offset1 span5">
+							Ciudad origen
+							<br>
+							<spam id="the_sick_citybth"></spam>
+						</div>
+					</div>
+				</div>
+				<a href="" class='btn btn-link'>Ir al registro</a>
+			</div>
 				
 				
 		</div>
