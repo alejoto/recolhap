@@ -30,14 +30,14 @@
 				&nbsp; | &nbsp;
 
 				<a href="#modal_register" role="button" class="" data-toggle="modal" >
-					<b class='oxygen'>Registrarse</b>
+					<b class='oxygen'>Registrarse por primera vez</b>
 				</a>&nbsp; | &nbsp;
 
 				<a href="{{URL::to('help')}}" class=""  > 
 					<b class='oxygen'>Ayuda</b>
 				</a>
-				@include('modules.login.login')
-				@include('modules.register.register')
+				@include('intro.login')
+				@include('intro.register')
 			@endif
 		</div>
 	</div>
@@ -48,7 +48,7 @@
 <div class="row-fluid" style="margin-top: 20px;">
 	<div class="span12" style="margin: 0px auto;">
 		<div id="banner">
-			@include('modules/includes/carousel')
+			@include('intro.carousel')
 		</div>
 	</div>
 </div>
@@ -111,7 +111,7 @@
 			</a>
 		</div>
 		<br>
-		@include('modules/includes/privacy')
+		@include('intro.privacy')
 
 		<br>
 		<div class="row-fluid" style="margin-top: 0px;">
@@ -132,4 +132,5 @@
 @section('scripts')
 {{HTML::script('assets/js/hmdv1.js');}}
 {{HTML::script('assets/js/login.js');}}
+{{HTML::script('assets/js/register.js');}}
 @stop

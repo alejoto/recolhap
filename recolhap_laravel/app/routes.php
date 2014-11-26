@@ -19,6 +19,8 @@ Route::get('/', function()
 
 Route::controller('login','LoginController');
 
+Route::controller('city','CitiesController');
+
 Route::get('/help',function(){
 	return View::make('modules.includes.instructions');
 });

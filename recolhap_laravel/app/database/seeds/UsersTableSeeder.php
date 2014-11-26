@@ -8,7 +8,7 @@ class UsersTableSeeder extends Seeder {
 	public function run()
 	{
 		//$faker = Faker::create();
-		DB::table('users')->truncate();
+		//DB::table('users')->truncate();
 
 		$theusers=array(
 			"joaleto@yahoo.com"				=>'12345',
@@ -31,13 +31,13 @@ class UsersTableSeeder extends Seeder {
 			)
 		;
 
-		foreach($theusers as $k=>$v)
+		/*foreach($theusers as $k=>$v)
 		{
 			$user = new User;
 			$user->email = $k;
 			$user->pwd = Hash::make($v);
 			$user->save();
-		}
+		}*/
 
 		/*
 		NO STORED
