@@ -40,13 +40,24 @@
 
 
 
-hide_show_savebutton([$("#year"),$("#month"),$("#day")
+hide_show_savebutton(
+    [
+    $("#year"),
+    $("#month"),
+    $("#day")
 
-    ,$('#pap_sys'),$('#pap_dias'),$('#pas_sys')
+    ,$('#pap_sys'),
+    $('#pap_dias'),
+    $('#pas_sys')
 
-    ,$('#pas_dias'),$('#rt_atr_press'),$('#pulm_wedg_press')
+    ,$('#pas_dias'),
+    $('#rt_atr_press'),
+    $('#pulm_wedg_press')
 
-    ,$('#cardiac_outp')], $('#ask_for_react_test'));
+    ,$('#cardiac_outp')], 
+    $('#ask_for_react_test')
+    )
+;
 
 
 
