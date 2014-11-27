@@ -30,6 +30,7 @@ Route::group(
 	function() {
 		Route::controller('patients','PatientsController');
 		Route::controller('tables','TablesController');
+		Route::controller('complete','CompletedataController');
 	}
 	)
 ;

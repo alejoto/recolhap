@@ -5,6 +5,10 @@ class Patient extends \Eloquent {
 	public $primaryKey='patient_id';
 	protected $fillable = [];
 
+	public function evaluation () {
+		return $this->hasMany('Evaluation','patient_id','patient_id');
+	}
+
 	public function leftcatheter () {
 		return $this->hasMany('Leftcatheter','patient_id');
 	}

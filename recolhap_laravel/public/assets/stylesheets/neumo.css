@@ -14,6 +14,10 @@ html,body {
   text-align: left;
 }
 
+.registerheight{
+  max-height: 240px;
+}
+
 
 .container {
 
@@ -182,7 +186,9 @@ html,body {
 
 }
 
-
+.recolhap_container{
+  max-height: 800px;
+}
 
 .info_index_0{
 
@@ -205,10 +211,12 @@ html,body {
 
 
 #footer {
+  /*footer*/
 
   clear: both;
 
-  position: relative;
+  /*position: relative;*/
+  
 
   z-index: 10;
 

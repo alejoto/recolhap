@@ -22,6 +22,17 @@ App::after(function($request, $response)
 	//
 });
 
+Route::filter('addhospital',function(){
+	$cl=Auth::user()->investigator->hospital_id;
+	if ($cl==0) {
+		return Redirect::to('/complete/hospital');
+	}
+	/*if (Auth::user()->investigator==0) {
+		return Redirect::to('/');
+	}*/
+	
+});
+
 Route::filter('page',function($route,$request){
 	if (null==($route->getParameter('page') )) {
 		return  Redirect::to('/');

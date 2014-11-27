@@ -26,9 +26,11 @@ return array(
 	| applications. A default option is provided that is compatible with
 	| the Postmark mail service, which will provide reliable delivery.
 	|
+	|
+	| 'host' => 'whub32.webhostinghub.com'
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => 'whub32.webhostinghub.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,9 +41,11 @@ return array(
 	| users of your application. Like the host we have set this value to
 	| stay compatible with the Postmark e-mail application by default.
 	|
+	|
+	| 'port' => 25,
 	*/
 
-	'port' => 587,
+	'port' => 25,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +58,9 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array(
+		'address' => 'projectmanager@healmydisese.com', 
+		'name' => 'Coordinador operativo registro RECOLHAP'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,9 +84,11 @@ return array(
 	| set it here. This will get used to authenticate with your server on
 	| connection. You may also set the "password" value below this one.
 	|
+	|
+	| 'username' => 'projectmanager@healmydisease.com'
 	*/
 
-	'username' => null,
+	'username' => 'projectmanager@healmydisease.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -91,9 +99,11 @@ return array(
 	| messages from your application. This will be given to the server on
 	| connection so that the application will be able to send messages.
 	|
+	|
+	| 'password' => 'laravel'
 	*/
 
-	'password' => null,
+	'password' => 'laravel',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -104,6 +114,8 @@ return array(
 	| the path to where Sendmail lives on this server. A default path has
 	| been provided here, which will work well on most of your systems.
 	|
+	|
+	|'sendmail' => '/usr/sbin/sendmail -bs'
 	*/
 
 	'sendmail' => '/usr/sbin/sendmail -bs',

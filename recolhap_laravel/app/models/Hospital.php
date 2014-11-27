@@ -18,4 +18,8 @@ class Hospital extends \Eloquent {
 	public function city () {
 		return $this->belongsTo('City');
 	}
+
+	public function user () {
+		return $this->hasMany('User');
+	}
 }

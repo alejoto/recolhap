@@ -2,24 +2,11 @@ $(function(){
 	$('#change_city').hide();
 	$('#newcity_form').hide();
 	$('#cascade1_register').hide();
-	$('#alreadysubscribed_list').hide();
-	$('#hide_already_subscribedlist').hide();
 
-	$('#already_subscribed').click(function(e){
-		e.preventDefault();
-		$('#alreadysubscribed_list').show('fast');
-		$('#hide_already_subscribedlist').show('fast');
-	});
-
-	$('#hide_already_subscribedlist').click(function(e){
-		e.preventDefault();
-		$('#alreadysubscribed_list').hide('fast');
-		$('#hide_already_subscribedlist').hide('fast');
-	});
 	$('#city_recolhap').change(function(){
-		//
 		var city=$('#city_recolhap').val();
 		var cityname=$("#city_recolhap option:selected").text();
+
 
 		$('#clinic_recolhap').hide('fast');
 
@@ -34,12 +21,15 @@ $(function(){
 			$('#selected_city').html('');
 			$('#change_city').hide('fast');
 			$('#cascade1_register').hide('fast');
-		} else {
+		}
+		else {
+			$('#newcity_form').hide('fast');
+			$('#city_recolhap').show('fast');
 			$('#clinic_recolhap').show('fast');
-			$('#cascade1_register').show('fast');
 			$('#change_city').show('fast');
 			$('#selected_city').html(cityname);
 			$(this).hide('fast');
+			$('#cascade1_register').show('fast');
 			
 			var base=$('#base').html();
 			$.get(
@@ -69,7 +59,6 @@ $(function(){
 			;
 		}
 	});
-
 	function addcityform(){$('#city_recolhap').show('fast');}
 
 	//
@@ -85,6 +74,7 @@ $(function(){
 		$('#city_recolhap').show('fast');
 	});
 
+	//
 	function enable_hospitals(){
 		$('#change_clinic').hide();
 		$('#newclinic_form').hide();
@@ -93,26 +83,28 @@ $(function(){
 		$('#clinic_recolhap').change(function(){
 			var h_id=$(this).val();
 			var hospital=$("#clinic_recolhap option:selected").text();
+			//
 			if (h_id=='') {
 				$('#clinic_recolhap').show('fast');
 				$('#change_clinic').hide('fast');
 				$('#newclinic_form').hide('fast');
 				$('#selected_clinic').html('');
-				$('#cascade2_register').hide('fast');
-			} else if (h_id=='newhospital') {
+				//$('#cascade2_register').hide('fast');
+			}
+			else if (h_id=='newhospital') {
 				$('#clinic_recolhap').hide('fast');
 				$('#newclinic_form').show('fast');
 				$('#change_clinic').hide('fast');
 				$('#selected_clinic').html('');
-				$('#cascade2_register').hide('fast');
-			} else {
+				//$('#cascade2_register').hide('fast');
+			} 
+			else {
 				$('#clinic_recolhap').hide('fast');
 				$('#change_clinic').show('fast');
 				$('#newclinic_form').hide('fast');
 				$('#selected_clinic').html(hospital);
 				$('#cascade2_register').show('fast');
 			}
-			
 		});
 
 		$('#change_clinic').click(function(e){
@@ -126,6 +118,26 @@ $(function(){
 			$('#newclinic_form').hide('fast');
 			$('#clinic_recolhap').show('fast');
 		});
-
 	}
+
+	$('#accept_hospital').click(function(e){
+		e.preventDefault();
+		var clinic=$('#clinic_recolhap').val();
+		var base=$('#base').html();
+		$.post(base+'/complete/hospital',
+			{clinic:clinic},
+			function(d){
+				$('#accept_hospital').html(d);
+				if (d==1) {
+					//window.location.href=base+'/tables';
+				}
+			//
+			//$('#accept_hospital').html('1');
+		});
+	});
+
+
+
+
+
 });

@@ -11,11 +11,11 @@ $(function(){
 
     function validateEmail(sEmail) {
 
-        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    	var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
-        if (filter.test(sEmail)) {return true;}
+    	if (filter.test(sEmail)) {return true;}
 
-        else {return false;}
+    	else {return false;}
 
     }
 
@@ -25,27 +25,27 @@ $(function(){
 
     $('#usr').blur(function(){
 
-      if (!validateEmail($('#usr').val()))
+    	if (!validateEmail($('#usr').val()))
 
-      {
+    	{
 
-        $('#usr').focus();
+    		$('#usr').focus();
 
-        $("#msg").html("Ingrese email v&aacute;lido");
+    		$("#msg").html("Ingrese email v&aacute;lido");
 
-        $("#forgot_pwd").hide();
+    		$("#forgot_pwd").hide();
 
-      }
+    	}
 
-      else
+    	else
 
-      {
+    	{
 
-        $("#msg").html("");
+    		$("#msg").html("");
 
-        $("#forgot_pwd").show();
+    		$("#forgot_pwd").show();
 
-      }
+    	}
 
     });
 
@@ -62,57 +62,57 @@ $(function(){
     * Depend on:              jquery
     * Dependant:              modules/login/ajax_login.php (iniciates 
     *                         $_SESSION['username'] php variable)
-    */
-    function hap_login_method (){
-        $("#msg").text("");
+*/
+function hap_login_method (){
+	$("#msg").text("");
 
         //Error message when both fields are empty
         if ($('#usr').val()==""&&$('#pwd').val()=="") {
-            $("#msg").html("<label class='control-label' "
-                +"for='inputError'>No puede dejar campos "
-                +"vac&iacute;os.</label>");
-            $('#usr').focus();
+        	$("#msg").html("<label class='control-label' "
+        		+"for='inputError'>No puede dejar campos "
+        		+"vac&iacute;os.</label>");
+        	$('#usr').focus();
         }
 
         //Error message when user field is empty
         else if ($('#usr').val()=="") {
-            $("#msg").html("<label class='control-label' for='inputError'>ingrese su email.</label>");
-            $('#usr').focus();
+        	$("#msg").html("<label class='control-label' for='inputError'>ingrese su email.</label>");
+        	$('#usr').focus();
         }
 
 
       //Error message when password field is empty
       else if ($('#pwd').val()=="") {
-        $("#msg").html("<label class='control-label' for='inputError'>Debe ingresar su contrase&ntilde;a.</label>");
-        $('#pwd').focus();
-    }
+      	$("#msg").html("<label class='control-label' for='inputError'>Debe ingresar su contrase&ntilde;a.</label>");
+      	$('#pwd').focus();
+      }
 
     //if no empty, run ajax
-        else {
-            $("#loading").show();
-            var base=$('#base').html();
+    else {
+    	$("#loading").show();
+    	var base=$('#base').html();
             /*$.post(base+'/',{},function(d){
             	
             });*/
-            $.post(
-            	base+'/login',
+$.post(
+	base+'/login',
             	//"modules/login/ajax_login.php",
             	{ usr:$('#usr').val(), pwd:$('#pwd').val() },
             	function(d) {
-                	if(d==1) {
-                		window.location.href=base+'/patients';
+            		if(d==1) {
+            			window.location.href=base+'/patients';
 
                     	//document.location='modules/myaccount/myaccount.php?page=patients';
-                	} else { $("#msg").html("<label class='control-label' "
-                        +"for='inputError'>Verifique usuario y contrase&ntilde;a. "
-                        +"<br/>o reg&iacute;strese.</label>");
-                	}
-                	$("#loading").html(d);
+                    } else { $("#msg").html("<label class='control-label' "
+                    	+"for='inputError'>Verifique usuario y contrase&ntilde;a. "
+                    	+"<br/>o reg&iacute;strese.</label>");
                 }
-                )
-            ;
-        }
-    }
+                $("#loading").html(d);
+            }
+            )
+;
+}
+}
 
 
     /*
@@ -133,9 +133,9 @@ $(function(){
 
     /*Triggering ajax for sending password to email*/
     $('#forgot_pwd').click(function(){
-      $.post("modules/login/rememberpwd.php",{usr:$('#usr').val()}, function(data2){
-        $("#msg").html(data2);
-      });
+    	$.post("modules/login/rememberpwd.php",{usr:$('#usr').val()}, function(data2){
+    		$("#msg").html(data2);
+    	});
     });
 
 
@@ -157,23 +157,23 @@ $(function(){
 
     $('#mail').blur(function(){
 
-      if (!validateEmail($('#mail').val()))
+    	if (!validateEmail($('#mail').val()))
 
-      {
+    	{
 
-        $('#mail').focus();
+    		$('#mail').focus();
 
-        $("#msg_register").html("<div class='alert alert-error'>Ingrese email v&aacute;lido</div>");
+    		$("#msg_register").html("<div class='alert alert-error'>Ingrese email v&aacute;lido</div>");
 
-      }
+    	}
 
-      else
+    	else
 
-      {
+    	{
 
-        $("#msg_register").html("");
+    		$("#msg_register").html("");
 
-      }
+    	}
 
     })
 
@@ -183,83 +183,111 @@ $(function(){
 
 
 
-      var pwd_reg=$('#pwd1').val();
+    	var pwd_reg=$('#pwd1').val();
+    	var i=0;
+    	$('.required_').each(function(){
+    		var id=$(this).attr('id');
+    		if ( $(this).val()=='' ) {
+    			$("#msg_register").html(
+    				"<div class='alert alert-error'>No puede dejar "
+    				+"campos vac&iacute;os.</div>");
 
-      if ($('#mail').val()==""|| $('#pwd1').val()==""|| $('#pwd2').val()=="") {
+    			if (i==0) {
+    				$(this).focus();
+    				i=i+1;
+    			}
 
-        $("#msg_register").html("<div class='alert alert-error'>No puede dejar campos vac&iacute;os.</div>");
+    		}
+    	});
+    	if (i==0) {
+    		if ($('#pwd1').val()!=$('#pwd2').val()) {
 
-        if ($('#mail').val()=="") $('#mail').focus();
+    			$("#msg_register").html("<div class='alert alert-error'>Ambas claves deben coincidir.</div>");
 
-        else if ($('#pwd1').val()=="") $('#pwd1').focus();
+    		}
+    		else if (pwd_reg.length <5) {
+    			$("#msg_register").html(
+    				"<div class='alert alert-error'>Clave debe contener mas de 5 caracteres.</div>"
+    				)
+    			;
+    			$('#pwd1').focus();
 
-        else if ($('#pwd2').val()=="") $('#pwd2').focus();
-
-      } 
-
-      
-
-      else if ($('#pwd1').val()!=$('#pwd2').val()) {
-
-        $("#msg_register").html("<div class='alert alert-error'>Ambas claves deben coincidir.</div>");
-
-      }
-
-      else if (pwd_reg.length <5) {
-
-        $("#msg_register").html("<div class='alert alert-error'>Clave debe contener mas de 5 caracteres.</div>");
-
-        $('#pwd1').focus();
-
-      }
-
-
-
+        }
         else
 
-    {
+        {
 
-      $("#loading_reg").show();
+        	$("#loading_reg").show();
 
-      $("#msg_register").html("");
+        	$("#msg_register").html("");
+        	var base=$('#base').html();
 
-      
+        	$.post(
+        		//"modules/register/ajax_register.php",
+        		base+'/login/register',
+        		{
+        			//city_recolhap:$('#city_recolhap').val(),
+					clinic_recolhap:$('#clinic_recolhap').val(),
+					ivt_name:$('#ivt_name').val(),
+					ivt_surname:$('#ivt_surname').val(),
+					ivt_doc:$('#ivt_doc').val(),
+					ivt_specialty:$('#ivt_specialty').val(),
+					ivt_mobile:$('#ivt_mobile').val(),
+					mail:$('#mail').val(),
+					pwd1:$('#pwd1').val()
+        		}, 
+        		function(d) {
+        			if (d==1) {
+        				$("#msg_register").html(
+        					"<div class='alert alert-error'>"
+        						+"Usuario ya existe.  Use el bot&oacute;n Entrar. "
+        						+"All&iacute; podr&aacute; recuperar su contrase&ntilde;a"
+        					+"</div>"
+        					)
+        				;
+        			}
 
-      $.post("modules/register/ajax_register.php",{ mail:$('#mail').val(), pwd1:$('#pwd1').val(), pwd2:$('#pwd2').val() }, function(data) {
+        		/*The data variable has some garbage, that's why y just compare the 3 first character*/
 
-    	  /*The data variable has some garbage, that's why y just compare the 3 first character*/
+        		/*if(data.substring(0,3) == "yes") {
 
-    	  if(data.substring(0,3) == "yes") {
+        			$("#msg_register").html("<div class='alert alert-success'>Muy bien!"
 
-    		  $("#msg_register").html("<div class='alert alert-success'>Muy bien!"
+        				+" Ahora ingrese a su email para activar su cuenta."
 
-            +" Ahora ingrese a su email para activar su cuenta."
+        				+" VERIFIQUE SU CARPETA SPAM si no encuentra el mensaje de activacion </div>");
 
-            +" VERIFIQUE SU CARPETA SPAM si no encuentra el mensaje de activacion </div>");
+        		}
 
-    	  }
+        		else if (data=='mmm') {
 
-    	  else if (data=='mmm') {
+        			$("#msg_register").html("<div class='alert alert-error'>Usuario ya inici&oacute; proceso de registro.  Verifique bandeja de entrada de su email para terminar de activar cuenta.</div>");
 
-    		  $("#msg_register").html("<div class='alert alert-error'>Usuario ya inici&oacute; proceso de registro.  Verifique bandeja de entrada de su email para terminar de activar cuenta.</div>");
+        		} 
 
-    	  } 
+        		else
 
-    	  else
+        		{
 
-    	  {
+        			$("#msg_register").html("<div class='alert alert-error'>Usuario ya existe.  Use el bot&oacute;n Entrar.  All&iacute; podr&aacute; recuperar su contrase&ntilde;a</div>");
 
-    		  $("#msg_register").html("<div class='alert alert-error'>Usuario ya existe.  Use el bot&oacute;n Entrar.  All&iacute; podr&aacute; recuperar su contrase&ntilde;a</div>");
+        		}*/
 
-    	  }
+        		$("#loading_reg").hide();
 
-    	  $("#loading_reg").hide();
+        	});
 
-      	});
+}
+}
 
-      }
 
-    }
+
+
+
+
+
+
+}
 
 
 

@@ -1,10 +1,10 @@
-<div id="modal_register" class="modal hider fader recolhap_left" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal_register" class="modal hide fade recolhap_left" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 	<div class="modal-header ">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		<h2 id="myModalLabel">Registrarse por primera vez</h2>
 	</div>
-	<div class="modal-body ">
+	<div class="modal-body registerheight">
 		<a href="" id="already_subscribed" >
 			<small class="text-info">Verifique si ya está registrado</small>
 		</a>
@@ -29,7 +29,7 @@
 			(cambiar)
 		</a>
 		<br>
-		<select name="" id="city_recolhap" class="input-xlarge">
+		<select name="" id="city_recolhap" class="input-xlarge required_">
 			<option value=""></option>
 			@foreach(City::all() as $c)
 				<option value="{{$c->id}}">{{$c->name}}</option>
@@ -50,7 +50,7 @@
 			</a>
 			(a la cual est&aacute; principalmente vinculado)
 			<br>
-			<select name="" id="clinic_recolhap" class="input-xlarge"></select>
+			<select name="" id="clinic_recolhap" class="input-xlarge required_"></select>
 			<div id="newclinic_form">
 				<input type="text" class="input-xlarge" id="newclinicname" placeholder='Agregar nombre instituci&oacute;n'>
 				<br>
@@ -61,19 +61,19 @@
 				<!-- Nombres
 				<br> -->
 				<br><br>
-				<input type="text" class="input-xlarge" id="ivt_name" placeholder='NOMBRES'>
+				<input type="text" class="input-xlarge required_" id="ivt_name" placeholder='NOMBRES'>
 				<br><br>
 				<!-- Apellidos
 				<br> -->
-				<input type="text" class="input-xlarge" id="ivt_surname" placeholder='APELLIDOS'>
+				<input type="text" class="input-xlarge required_" id="ivt_surname" placeholder='APELLIDOS'>
 				<br><br>
 				<!-- Cédula
 				<br> -->
-				<input type="text" class="input-xlarge" id="ivt_doc" placeholder='NUMERO CEDULA'>
+				<input type="text" class="input-xlarge required_" id="ivt_doc" placeholder='NUMERO CEDULA'>
 				<br><br>
 				<!-- Especialidad
 				<br> -->
-				<select name="" id="ivt_specialty" class="input-xlarge">
+				<select name="" id="ivt_specialty" class="input-xlarge required_">
 					<option value="">ESPECIALIDAD</option>
 					<option value="NEUMOLOGO">neumologo</option>
 					<option value="INTERNISTA">medicina interna</option>
@@ -84,52 +84,27 @@
 				<br><br>
 				<!-- Celular
 				<br> -->
-				<input type="text" id="ivt_mobile" class="input-xlarge" placeholder='CELULAR'>
+				<input type="text" id="ivt_mobile" class="input-xlarge required_" placeholder='CELULAR'>
 				<br>
 				<br>
-				<input type="text" id="mail" class="input-xlarge" placeholder='EMAIL'>
+				<input type="text" id="mail" class="input-xlarge required_" placeholder='EMAIL'>
 				<br>
 				<br>
-				<input class="input-large" id="pwd1" name="pwd1" type="password" placeholder="CONTRASE&Ntilde;A">
+				<input class="input-large required_" id="pwd1" name="pwd1" type="password" placeholder="CONTRASE&Ntilde;A">
 				<br>
 				<br>
-				<input class="input-large" id="pwd2" name="pwd2" type="password" placeholder="CONFIRMAR CONTRASE&Ntilde;A">
+				<input class="input-large required_" id="pwd2" name="pwd2" type="password" placeholder="CONFIRMAR CONTRASE&Ntilde;A">
 				<br>
 				<div  id="loading_reg" style="display:none">
 					<img src="assets/images/ajax-loader.gif"/>
 				</div>
-				<div class="control-group error" id="msg_register"></div>
+				
 			</div>
 		</div>
 
-		<div class="input-prepend">        
-			<!-- <span class="add-on"><i class="icon-envelope "></i></span>
-			<select class="input-large" id="mail" name="mail" >
-				<option value="">Ingreso controlado: escoja email</option>
-				<option value="fpernett@cable.net.co">Dr. Frank Pernett</option>
-				<option value="claudiovillaquiran@gmail.com">Dr. Claudio Villaquiran</option>
-				<option value="crdc2001@gmail.com">DR. CARMELO DUE&Ntilde;AS | crdc2001@gmail.com</option>
-				<option value="carmachado@hotmail.com">Dr. Carlos Machado</option>
-				<option value="dario.londono@gmail.com">Dr. Dario Londoño (correo gmail)</option>
-				<option value="maocespedes@gmail.com">Dr. Mauricio Cespedes</option>
-				<option value="lfernandez@fvl.org">Dra. Liliana Fernandez</option>
-				<option value="jquinteromd@gmail.com">Dr. Jorge Quintero</option>
-				<option value="rcontrerasl@cable.net.co">Dr. Ruben Contreras</option>
-				<option value="dmcelis@une.net.co">Dr. Diego Celis</option>
-			</select> -->
-			<!-- <option value="aggt@une.net.co">DR. JORGE ORTEGA | aggt@une.net.co</option>
-			<option value="yolima138@gmail.com">DRA. YOLIMA ALZATE | yolima138@gmail.com</option>
-			<option value="ctorres@neumologica.org">DR.  CARLOS TORRES | ctorres@neumologica.org</option>
-			<option value="jaimebarreto2004@yahoo.com">DR. JAIME BARRETO | jaimebarreto2004@yahoo.com</option> -->
-		   <!--  <br><br>
-			    
-			<br><br>
-			<span class="add-on"><i class="icon-check "></i></span>
-			<input class="input-large" id="pwd2" name="pwd2" type="password" placeholder="Confirmar contrase&ntilde;a"><br> -->
-		</div>
-</div>
-
-<div class="modal-footer">
+	</div>
+	<div class="modal-footer">
+		<div class="control-group error" id="msg_register"></div>
       <!--
       * button name:          register_button
       * Triggers:             hap_registration()
@@ -137,8 +112,8 @@
       * js associated file:   login.js
       * php AJAX:             modules/register/ajax_register.php
   -->
-  <a class="btn btn-primary" id="register_button" >Registrarse</a>
-  <a class="btn btn-info" data-dismiss="modal" aria-hidden="true" >Cerrar</a>
-</div>
+  		<a class="btn btn-primary" id="register_button" >Registrarse</a>
+  		<a class="btn btn-info" data-dismiss="modal" aria-hidden="true" >Cerrar</a>
+  	</div>
 </div>
 
