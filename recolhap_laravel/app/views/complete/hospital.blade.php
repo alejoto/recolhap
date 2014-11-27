@@ -50,5 +50,6 @@
 
 @stop
 @section('scripts')
+{{HTML::script('assets/js/medic.js');}}
 {{HTML::script('assets/js/completedata.js');}}
 @stop

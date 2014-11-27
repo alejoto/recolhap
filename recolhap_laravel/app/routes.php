@@ -21,6 +21,8 @@ Route::controller('login','LoginController');
 
 Route::controller('city','CitiesController');
 
+Route::controller('hospital','HospitalController');
+
 Route::get('/help',function(){
 	return View::make('modules.includes.instructions');
 });

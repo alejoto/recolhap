@@ -131,6 +131,7 @@
 
 @section('scripts')
 {{HTML::script('assets/js/hmdv1.js');}}
+{{HTML::script('assets/js/medic.js');}}
 {{HTML::script('assets/js/login.js');}}
 {{HTML::script('assets/js/register.js');}}
 @stop

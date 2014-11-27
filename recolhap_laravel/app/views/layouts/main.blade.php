@@ -5,9 +5,11 @@
 		{{HTML::style('assets/stylesheets/bootstrap.min.css')}}  
 		{{HTML::style('assets/css/sticky-footer-navbar.css')}} 
 		{{HTML::style('assets/stylesheets/neumo.css')}} 
-		<link href="" rel="stylesheet" media="screen">
-		<link rel="icon"   type="image/png"  href="../../assets/images/favicon.ico">
-		<link rel="stylesheet" href="../../assets/fonts/css/font-awesome.min.css">
+		{{HTML::style('assets/fonts/css/font-awesome.min.css')}} 
+		<!-- asset('img/photo.jpg'); -->
+		<link rel="icon"   type="image/png"  href="{{asset('assets/images/favicon.ico')}}">
+		<!-- <link rel="icon"   type="image/png"  href="../../assets/images/favicon.ico"> -->
+		<!-- <link rel="stylesheet" href="../../assets/fonts/css/font-awesome.min.css"> -->
 		<link href='http://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Oxygen:400,700,300' rel='stylesheet' type='text/css'>
 		
@@ -22,7 +24,8 @@
 					<div class="span3">
 						<p class="recolhap_play">
 							RECOLHAP
-							<img class='recolhap_head_img' src="../../assets/images/logo-gray.png">
+							<img class='recolhap_head_img' src="
+							{{asset('assets/images/logo-gray.png')}}">
 						</p>
 					</div>
 					<div class="span5">
@@ -87,7 +90,7 @@
 			<div class="row-fluid">
 				<div class="span6">
 					<p class="recolhap_footer1">
-						<img class='recolhap_head_img'  src="../../assets/images/logo-gray.png"> 
+						<img class='recolhap_head_img'  src="{{asset('assets/images/logo-gray.png')}}"> 
 						Recolhap &copy; 
 						- Registro colombiano de hipertensi&oacute;n arterial pulmonar.
 					</p>
@@ -95,7 +98,7 @@
 				<div class="span6">
 					<div class="recolhap_footer">
 						HMD &copy; - Medell&iacute;n, Colombia. 2014
-						<img src="../../assets/images/hmdlogo.png" class='recolhap_bottom' >
+						<img src="{{asset('assets/images/hmdlogo.png')}}" class='recolhap_bottom' >
 					</div>
 				</div>
 			</div>

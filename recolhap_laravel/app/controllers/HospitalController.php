@@ -1,10 +1,10 @@
 <?php
 
-class CitiesController extends \BaseController {
+class HospitalController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /cities
+	 * GET /hospital
 	 *
 	 * @return Response
 	 */
@@ -13,22 +13,19 @@ class CitiesController extends \BaseController {
 		//
 	}
 
-	public function getJsoncities ($id) {
-		return City::find($id)->hospital;
-	}
-
 	public function postIndex () {
-		$c=new City;
-		$c->name=Input::get('city');
-		$c->country_id=1;
-		$c->save();
-
-		return $c->id;
+		$city_id=Input::get('city');
+		$hospital=Input::get('clinic');
+		$h=new Hospital;
+		$h->hospital_name= $hospital;
+		$h->city_id= $city_id;
+		$h->save();
+		return $h->id;
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /cities/create
+	 * GET /hospital/create
 	 *
 	 * @return Response
 	 */
@@ -39,7 +36,7 @@ class CitiesController extends \BaseController {
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /cities
+	 * POST /hospital
 	 *
 	 * @return Response
 	 */
@@ -50,7 +47,7 @@ class CitiesController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
-	 * GET /cities/{id}
+	 * GET /hospital/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -62,7 +59,7 @@ class CitiesController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /cities/{id}/edit
+	 * GET /hospital/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -74,7 +71,7 @@ class CitiesController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /cities/{id}
+	 * PUT /hospital/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -86,7 +83,7 @@ class CitiesController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /cities/{id}
+	 * DELETE /hospital/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

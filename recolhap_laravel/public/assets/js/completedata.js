@@ -137,6 +137,60 @@ $(function(){
 	});
 
 
+	up_cas( $('#newcityname') );
+
+	$('#add_new_city').click(function(e){
+		e.preventDefault();
+		var city=$('#newcityname').val();
+		var base=$('#base').html();
+		$.post(
+			base+'/city',
+			{city:city},
+			function(d){
+				$('#add_new_city').html(1);
+				$('#city_recolhap').append(
+					'<option value="'+d+'" selected>'
+					+city
+					+'</option>'
+					)
+				;
+				$('#city_recolhap').hide('fast');
+				$('#newcity_form').hide('fast');
+				$('#change_city').show('fast');
+				$('#selected_city').html(city);
+			}
+			)
+		;
+	});
+
+	up_cas( $('#newclinicname') );
+
+
+	$('#add_new_clinic').click(function(e){
+		e.preventDefault();
+		var city=$('#city_recolhap').val();
+		var clinic=$('#newclinicname').val();
+		var base=$('#base').html();
+		$.post(base+'/hospital',{
+			city:city,
+			clinic:clinic
+		},function(d){
+			$('#clinic_recolhap').append(
+				'<option value="'+d+'" selected>'+
+				clinic+
+				'</option>'
+				)
+			;
+			$('#clinic_recolhap').hide('fast');
+			$('#change_clinic').show('fast');
+			$('#newclinic_form').hide('fast');
+			$('#selected_clinic').html(clinic);
+			$('#cascade2_register').show('fast');
+		});
+	});
+
+
+
 
 
 
