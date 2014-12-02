@@ -28,8 +28,8 @@ Route::filter('complete',function(){
 });
 
 Route::filter('addhospital',function(){
-	$cl=Auth::user()->investigator->hospital_id;
-	if ($cl==0) {
+	//$cl=Auth::user()->investigator->hospital;
+	if (Auth::user()->investigator->hospital==null) {
 		return Redirect::to('/complete/hospital');
 	}
 	/*if (Auth::user()->investigator==0) {

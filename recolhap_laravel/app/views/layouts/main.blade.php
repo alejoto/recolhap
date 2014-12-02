@@ -30,6 +30,12 @@
 					</div>
 					<div class="span5">
 						<div class="btn-group">
+							@if(Auth::user()->rol==1||Auth::user()->rol==2)
+							<a href="{{URL::to('accesslist')}}" class="btn btn-inverse" id="admin_users_btn">
+								Administrar usuarios
+								<i class="icon-wrench icon-white"></i>
+							</a>
+							@endif
 							<a href="{{URL::to('patients')}}" class="btn btn-inverse" id="change_patient_btn">
 								Cambiar paciente
 								<i class="icon-user icon-white"></i>

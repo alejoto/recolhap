@@ -127,9 +127,9 @@ $(function(){
 		$.post(base+'/complete/hospital',
 			{clinic:clinic},
 			function(d){
-				$('#accept_hospital').html(d);
+				//$('#accept_hospital').html(d);
 				if (d==1) {
-					//window.location.href=base+'/tables';
+					window.location.href=base+'/patients';
 				}
 			//
 			//$('#accept_hospital').html('1');

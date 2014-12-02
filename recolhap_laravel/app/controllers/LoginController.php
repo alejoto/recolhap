@@ -9,7 +9,11 @@ class LoginController extends \BaseController {
 		$pwd=$_POST['pwd'];
 		if (Auth::attempt(array('email' => $email, 'password' => $pwd)))
 		{
-		    return 1;
+			if (Auth::user()->rol==1||Auth::user()->rol==2) {
+				return 2;
+			} else {
+				return 1;
+			}
 		}
 		return 0;
 	}

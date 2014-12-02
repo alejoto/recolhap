@@ -6,7 +6,7 @@
 		<th>Perfil</th>
 	</tr>
 	@foreach($regular as $r)
-		@if($r->user->status==1)
+		@if($r->user->status==1&&$r->user->rol!=1)
 			<tr>
 				<td>
 					{{$r->ivt_name}}

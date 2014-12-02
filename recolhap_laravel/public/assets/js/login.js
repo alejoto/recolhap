@@ -103,8 +103,14 @@ $.post(
             			window.location.href=base+'/patients';
 
                     	//document.location='modules/myaccount/myaccount.php?page=patients';
-                    } else { $("#msg").html("<label class='control-label' "
-                    	+"for='inputError'>Verifique usuario y contrase&ntilde;a. "
+                    } 
+                    else if (d==2) {
+                        window.location.href=base+'/accesslist';
+                    }
+                    else { 
+                        $("#msg").html("<label class='control-label' "
+                    	+"for='inputError'>Verifique usuario y "
+                        +"contrase&ntilde;a. "
                     	+"<br/>o reg&iacute;strese.</label>");
                 }
                 $("#loading").html(d);

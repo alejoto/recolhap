@@ -31,7 +31,7 @@ Route::group(
 	array('before' => 'auth'), 
 	function() {
 		Route::group(
-			array('before'=>'complete|noactiveyet'),
+			array('before'=>'addhospital|complete|noactiveyet'),
 			function(){
 				Route::controller('patients','PatientsController');
 				Route::controller('tables','TablesController');
