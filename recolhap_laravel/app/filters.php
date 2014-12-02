@@ -21,6 +21,11 @@ App::after(function($request, $response)
 {
 	//
 });
+Route::filter('complete',function(){
+	if (Auth::user()->investigator==null) {
+		return Redirect::to('/complete/investigator');
+	}
+});
 
 Route::filter('addhospital',function(){
 	$cl=Auth::user()->investigator->hospital_id;
@@ -30,7 +35,12 @@ Route::filter('addhospital',function(){
 	/*if (Auth::user()->investigator==0) {
 		return Redirect::to('/');
 	}*/
-	
+});
+
+Route::filter('noactiveyet',function(){
+	if (Auth::user()->status<1) {
+		return Redirect::to('noactiveyet');
+	}
 });
 
 Route::filter('page',function($route,$request){

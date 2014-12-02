@@ -18,6 +18,10 @@ class UserController extends \BaseController {
 	 	return 1;
 	}
 
+	public function noactiveyet () {
+		return View::make('accesslist.no_active_yet');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /user

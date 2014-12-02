@@ -30,10 +30,17 @@ Route::get('/help',function(){
 Route::group(
 	array('before' => 'auth'), 
 	function() {
-		Route::controller('patients','PatientsController');
-		Route::controller('tables','TablesController');
+		Route::group(
+			array('before'=>'complete|noactiveyet'),
+			function(){
+				Route::controller('patients','PatientsController');
+				Route::controller('tables','TablesController');
+				Route::controller('cath','RightcathController');
+			}
+			)
+		;
+		
 		Route::controller('complete','CompletedataController');
-		Route::controller('cath','RightcathController');
 		Route::resource('accesslist','AccesslistController');
 		Route::resource('user','UserController');
 		Route::post('activate', 'UserController@activate');
@@ -44,4 +51,5 @@ Route::group(
 	}
 	)
 ;
+Route::get('noactiveyet','UserController@noactiveyet');
 

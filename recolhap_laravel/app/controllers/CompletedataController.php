@@ -13,6 +13,27 @@ class CompletedataController extends \BaseController {
 		//
 	}
 
+	public function getInvestigator () {
+		return View::make('complete.investigator');
+	}
+
+	public function postInvestigator () {
+		if (Auth::user()->investigator==null) {
+			$i=new Investigator;
+			$i->ivt_name	=Input::get('ivt_name');
+			$i->ivt_surname	=Input::get('ivt_surname');
+			$i->ivt_doc		=Input::get('ivt_doc');
+			$i->ivt_specialty	=Input::get('ivt_specialty');
+			$i->ivt_mobile	=Input::get('ivt_mobile');
+			$i->ivt_city	=Input::get('ivt_city');
+			$i->ivt_country	=Input::get('ivt_country');
+			$i->user_id		=Auth::user()->email;
+			$i->hospital_id	=Input::get('hospital_id');
+			$i->save();
+		}
+		return Redirect::to('patients');
+	}
+
 	public function getHospital () {
 		return View::make('complete.hospital'); 
 	}
