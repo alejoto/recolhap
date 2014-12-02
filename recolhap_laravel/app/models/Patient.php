@@ -12,4 +12,10 @@ class Patient extends \Eloquent {
 	public function leftcatheter () {
 		return $this->hasMany('Leftcatheter','patient_id');
 	}
+
+	public function scopeTired ($query) {
+		return $query	->where('')
+		;
+	}
+	
 }

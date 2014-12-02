@@ -107,4 +107,5 @@
 </html>
 {{HTML::script('assets/js/jquery.min.js');}}
 {{HTML::script('assets/js/bootstrap.min.js');}}
+{{HTML::script('assets/js/medic.js');}}
 @yield('scripts')

@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<td>
-				<a href="">Cateterismo derecho </a>
+				<a href="{{URL::to('cath/patient/'.$p->patient_id)}}">Cateterismo derecho </a>
 			</td>
 			<td>
 				3

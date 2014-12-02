@@ -1,52 +1,35 @@
-/*Esconder formulario del test de vasorreactividad*/
-
+$(function(){
+    //
     $(document).ready(function() { $("#reactiv").hide(); });
+    $("#save_rt_cath").hide();
 
-    
-
-
-
-
-
-    
-
-    $(document).ready(function() {
-
-        $("#save_rt_cath").hide();
-
-        $("#vreac_test_done").change(function(){
-
-            var vreac_test_done=$("#vreac_test_done").val();
-
-            if (vreac_test_done=="no") {$("#save_rt_cath").show("fast");}
-
-            else if (vreac_test_done=="si") {
-
-                $("#save_rt_cath").hide("fast");
-
-                $("#basal").hide("fast");
-
-                $("#reactiv").show("fast");
-
-            }
-
-            else {$("#save_rt_cath").hide("fast");}
-
-        });
-
+    $("#vreac_test_done").change(function(){
+        var vreac_test_done=$("#vreac_test_done").val();
+        if (vreac_test_done=="no") {
+            $("#save_rt_cath").show("fast");
+        } else if (vreac_test_done=="si"){
+            $("#save_rt_cath").hide("fast");
+            $("#basal").hide("fast");
+            $("#reactiv").show("fast");
+        } else {
+            $("#save_rt_cath").hide("fast");
+        }
     });
-
-
-
-
+});
+/*Esconder formulario del test de vasorreactividad*/
 
 hide_show_savebutton([$("#year"),$("#month"),$("#day")
 
-    ,$('#pap_sys'),$('#pap_dias'),$('#pas_sys')
+    ,$('#pap_sys')
+    ,$('#pap_dias')
 
-    ,$('#pas_dias'),$('#rt_atr_press'),$('#pulm_wedg_press')
+    //,$('#pas_sys')
+    //,$('#pas_dias')
+    //,$('#rt_atr_press')
+    ,$('#pulm_wedg_press')
 
-    ,$('#cardiac_outp')], $('#ask_for_react_test'));
+    //,$('#cardiac_outp')
+    ], $('#ask_for_react_test'));
 
 
 

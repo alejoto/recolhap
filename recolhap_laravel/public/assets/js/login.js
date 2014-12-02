@@ -180,74 +180,91 @@ $.post(
 
 
     function hap_registration() {
-
-
-
     	var pwd_reg=$('#pwd1').val();
-    	var i=0;
-    	$('.required_').each(function(){
-    		var id=$(this).attr('id');
+
+        //iteration on each field checking empty values
+        var i=0;
+        $('.required_').each(function(){
+    		//checking empty fields
     		if ( $(this).val()=='' ) {
     			$("#msg_register").html(
-    				"<div class='alert alert-error'>No puede dejar "
-    				+"campos vac&iacute;os.</div>");
+                    //message when finding at least one required 
+                    //emtpy field
+                    "<div class='alert alert-error'>No puede dejar "
+                    +"campos vac&iacute;os.</div>");
 
     			if (i==0) {
-    				$(this).focus();
-    				i=i+1;
-    			}
+                    //i as 0 identifies the first field. So it will
+                    //focus the first empty field, besides existing
+                    //many more emtpy fields
+                    $(this).focus();
+                    i=i+1;
+                }
 
-    		}
-    	});
-    	if (i==0) {
-    		if ($('#pwd1').val()!=$('#pwd2').val()) {
+            }
+        });
 
-    			$("#msg_register").html("<div class='alert alert-error'>Ambas claves deben coincidir.</div>");
+        //after emtpy field checking, if i remains as zero, it means
+        //all required fields were filled
+        if (i==0) {
 
-    		}
-    		else if (pwd_reg.length <5) {
-    			$("#msg_register").html(
-    				"<div class='alert alert-error'>Clave debe contener mas de 5 caracteres.</div>"
-    				)
-    			;
-    			$('#pwd1').focus();
+            //password must match with confirmation field
+            if ($('#pwd1').val()!=$('#pwd2').val()) {
 
-        }
-        else
+            	$("#msg_register").html(
+                    //Message when password not matching with 
+                    //confirmation field
+                    "<div class='alert alert-error'>Ambas claves deben coincidir.</div>");
 
-        {
+            }
 
-        	$("#loading_reg").show();
+            //minimun password length are five characters
+            else if (pwd_reg.length <5) {
+            	$("#msg_register").html(
+            		"<div class='alert alert-error'>Clave debe contener mas de 5 caracteres.</div>"
+            		)
+            	;
+            	$('#pwd1').focus();
+            }
+            else
+            {
+            	//Action will be triggered below as
+            	//password matched with confirmation request
+            	//and length were greater than 5 characters
 
-        	$("#msg_register").html("");
-        	var base=$('#base').html();
+            	//"wait while loading" icon displayed
+            	$("#loading_reg").show();
 
-        	$.post(
-        		//"modules/register/ajax_register.php",
+            	//removing all error messages
+            	$("#msg_register").html("");
+
+            	//base url for ajax request
+            	var base=$('#base').html();
+
+            	$.post(
         		base+'/login/register',
         		{
-        			//city_recolhap:$('#city_recolhap').val(),
-					clinic_recolhap:$('#clinic_recolhap').val(),
-					ivt_name:$('#ivt_name').val(),
-					ivt_surname:$('#ivt_surname').val(),
-					ivt_doc:$('#ivt_doc').val(),
-					ivt_specialty:$('#ivt_specialty').val(),
-					ivt_mobile:$('#ivt_mobile').val(),
-					mail:$('#mail').val(),
-					pwd1:$('#pwd1').val()
+        			clinic_recolhap:$('#clinic_recolhap').val(),
+        			ivt_name:$('#ivt_name').val(),
+        			ivt_surname:$('#ivt_surname').val(),
+        			ivt_doc:$('#ivt_doc').val(),
+        			ivt_specialty:$('#ivt_specialty').val(),
+        			ivt_mobile:$('#ivt_mobile').val(),
+        			mail:$('#mail').val(),
+        			pwd1:$('#pwd1').val()
         		}, 
         		function(d) {
         			if (d==1) {
         				$("#msg_register").html(
         					"<div class='alert alert-error'>"
-        						+"Usuario ya existe.  Use el bot&oacute;n Entrar. "
-        						+"All&iacute; podr&aacute; recuperar su contrase&ntilde;a"
+        					+"Usuario ya existe.  Use el bot&oacute;n Entrar. "
+        					+"All&iacute; podr&aacute; recuperar su contrase&ntilde;a"
         					+"</div>"
         					)
         				;
         			}
 
-        		/*The data variable has some garbage, that's why y just compare the 3 first character*/
+        			/*The data variable has some garbage, that's why y just compare the 3 first character*/
 
         		/*if(data.substring(0,3) == "yes") {
 

@@ -33,6 +33,14 @@ Route::group(
 		Route::controller('patients','PatientsController');
 		Route::controller('tables','TablesController');
 		Route::controller('complete','CompletedataController');
+		Route::controller('cath','RightcathController');
+		Route::resource('accesslist','AccesslistController');
+		Route::resource('user','UserController');
+		Route::post('activate', 'UserController@activate');
+		Route::post('inactivate', 'UserController@inactivate');
+
+		//Right catheter evaluation
+		//Route::get('patients/{patient}/cath','RightcathController@index');
 	}
 	)
 ;

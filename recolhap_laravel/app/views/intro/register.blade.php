@@ -12,6 +12,7 @@
 			<small>(Ocultar)</small>
 		</a>
 		<div id="alreadysubscribed_list">
+			USUARIOS YA REGISTRADOS:
 			<ul>
 				@foreach(User::all() as $u)
 					@if(isset($u->investigator->ivt_name))

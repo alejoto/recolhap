@@ -23,9 +23,30 @@ class LoginController extends \BaseController {
 		if (User::whereEmail($email)->count()>0) {
 			return 1;
 		} else {
+			/*$mail=array(
+				'recipient'	=>'alejoto@gmail.com',
+				'name'		=>'Alejandro Toro'
+				);
+
+			Mail::send(
+				'emails.test', 
+				array('key' => 'value'), 
+				function($message) use($mail) {
+					$message->to(
+						//'alejoto@gmail.com', 
+						$mail['recipient'],
+						$mail['name']
+						)
+					->subject(
+						'Welcome!'
+						)
+					;
+				}
+				)
+			;*/
 
 
-			/*$coord2='2.3';
+			$coord2='2.3';
 			$requester='4.3';
 			$tasks='t45.6';
 
@@ -35,25 +56,30 @@ class LoginController extends \BaseController {
 				,'tasks'  
 				)
 			;
+
 			$subject='testing email data';
 
-			$coord='joaleto@yahoo.com';
+			$coord='alejoto@gmail.com';
 			$name='Alejandro Toro';
-			$taskingeasy= 'no_reply@taskingeasy.com';
-
+			$recolhap= 'suppor@recolhap.com';
 			$maildata=array(
-			    'recipient'    =>    $coord
-			   , 'r_name'    =>    $name
-			   , 'sender'    =>    $taskingeasy
-			   , 's_name'    =>    'The TaskingEasy team'
-			   , 'subject'    =>    $subject
-			);*/
+			    'recipient'		=>    $coord
+			   , 'r_name'		=>    $name
+			   , 'sender'		=>    $recolhap
+			   , 's_name'		=>    'Registro Recolhap'
+			   , 'subject'		=>    $subject
+			);
+			Mail::send( 'emails.test',   $mssgdata,  function($message) use ($maildata) {
+			    $message->to($maildata['recipient'],$maildata['r_name'])
+					->from($maildata['sender'],$maildata['s_name'])
+					->subject($maildata['subject']);
+			});
 
-			$mail='joaleto@yahoo.com';
+			/*$mail='alejoto@gmail.com';
 			$subject='Collaborator left project';
 			$headers = "MIME-Version: 1.0" . "\r\n";
 			$headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
-			$headers .= 'From: no reply<no_reply@healmydisease.com>' . "\r\n";
+			$headers .= 'From: no reply<support@recolhap.com>' . "\r\n";
 			$content=
 			'<html>'.
 				'<head>'.
@@ -61,7 +87,7 @@ class LoginController extends \BaseController {
 					.'<title></title>'.
 				'</head>'.
 				'<body>'.
-					'<h1>Beta testing part 81</h1>'.
+					'<h1>Por favor hacer click en el siguiente link para activar su clave</h1>'.
 				'</body>'.
 			'</html>';
 			mail(
@@ -70,16 +96,7 @@ class LoginController extends \BaseController {
 				$content,
 				$headers
 				)
-			;
-
-
-
-			/*Mail::send( 'emails.test',   $mssgdata,  function($message) use ($maildata) {
-			    $message->to($maildata['recipient'],$maildata['r_name'])
-					->from($maildata['sender'],$maildata['s_name'])
-					->subject($maildata['subject']);
-			});*/
-
+			;*/
 		}
 		//check if email already exists
 		/*city_recolhap

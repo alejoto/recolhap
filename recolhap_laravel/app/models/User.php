@@ -4,6 +4,8 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
+	
+	protected $table = 'userdoctors';
 
 
 	public function investigator () {
@@ -14,7 +16,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'userdoctors';
 
 	/**
 	 * The attributes excluded from the model's JSON form.

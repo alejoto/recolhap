@@ -2,6 +2,15 @@
 
 class PatientsController extends \BaseController {
 
+	public function getAll () {
+		return View::make(
+			'patients.all'
+			//,
+			//compact()
+			)
+		;
+	}
+
 	public function getIndex () {
 		return View::make('patients.index');
 	}
@@ -87,28 +96,6 @@ class PatientsController extends \BaseController {
 		}
 			
 	}
-
-	/**
-	 * Display a listing of the resource.
-	 * GET /patients
-	 *
-	 * @return Response
-	 */
-	/*public function index()
-	{
-		return View::make('patients.index');
-	}*/
-
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /patients/create
-	 *
-	 * @return Response
-	 */
-	/*public function create()
-	{
-		//
-	}*/
 
 	/**
 	 * Store a newly created resource in storage.
