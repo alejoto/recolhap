@@ -3,10 +3,46 @@
 class PatientsController extends \BaseController {
 
 	public function getAll () {
+		$u=Auth::user();
+		$investigator=$u->investigator;
+		$clinic=Hospital::find($investigator->hospital_id);//$investigator->hospital;
+		$clinic_id=$clinic->hospital_id;
+		//
+		//
+		$investigators_from_clinic=array();
+		foreach ($clinic->investigator as $i) {
+			$investigators_from_clinic[$i->id]=$i->user_id;
+		}
+		//
+		$i_c=$investigators_from_clinic;
+		//
+		$eval=Evaluation::where(function($q) use($clinic){
+			foreach ($clinic->investigator as $i) {
+				$q->orWhere('digiter_id','=',$i->user_id);
+			}
+		});
+		/*$patients=Patient::where(function($q) use($clinic){
+			foreach ($clinic->investigator as $i) {
+				$q->orWhere('digiter_id','=',$i->user_id);
+			}
+		});*/
+		$patients=Patient::whereHas('evaluation',function($q) use($clinic){
+			$q->where('digiter_id','=',1);
+			foreach ($clinic->investigator as $i) {
+				$q->orWhere('digiter_id','=',$i->user_id);
+			}
+			//
+			//
+		});
 		return View::make(
-			'patients.all'
-			//,
-			//compact()
+			'patients.all',
+			compact(
+				'investigator',
+				'clinic',
+				'clinic_id',
+				'i_c',
+				'patients'
+				)
 			)
 		;
 	}

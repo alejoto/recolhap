@@ -22,27 +22,83 @@ class UserController extends \BaseController {
 		return View::make('accesslist.no_active_yet');
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /user
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
+	public function requestnewpwd () {
+		$email=Input::get('email');
+		$u=User::whereEmail($email);
+		if ($u->count()>0) {
+			//check if previous requests and delete
+			Pwdreset::whereEmail($email)->delete();
+
+			//hashing parameters
+			$hash=password_hash(date('Y-m-d H:i:s').$email, PASSWORD_DEFAULT);
+			//$bodytag = str_replace("%body%", "black", "<body text='%body%'>");
+			$hash=str_replace('/','',$hash);
+
+			//then set new request
+			$r=new Pwdreset;
+			$r->email=$email;
+			$r->token=$hash;
+			$r->save();
+
+			$mssgdata=array(
+				'link'=>$hash
+				)
+			;
+			$maildata=array(
+				'recipient'	=>$email,
+				'r_name'	=>'USUARIO RECOLHAP',
+				'subject'	=>'Restablecer contraseña'
+				)
+			;
+
+			Mail::send(   'emails.resetpwd',   $mssgdata,  function($message) use ($maildata) {
+    		$message->to($maildata['recipient'],$maildata['r_name'])
+            ->subject($maildata['subject']);
+});
+
+			return 1;
+		} else {
+			return 2;
+		}
+			
+		
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /user/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+	public function resetpwd ($token) {
+		$still=Pwdreset::whereToken($token)->count();
+		return View::make(
+			'password.reset',
+			compact(
+				'token',
+				'still'
+			)
+			)
+		;
 	}
+
+	public function savenewpassword () {
+		$email=Input::get('email');
+		$pwd=Input::get('pwd1');
+		$token=Input::get('token');
+		$p_reset=Pwdreset::whereToken($token)->whereEmail($email);
+		if ($p_reset->count()>0) {
+			User::whereEmail($email)->update(
+				array(
+					'pwd'=>Hash::make($pwd)
+					)
+				)
+			;
+			$p_reset->delete();
+			return 1;
+		} else {
+			return 2;
+		}
+		
+	}
+
+	
+
+	
 
 	/**
 	 * Store a newly created resource in storage.

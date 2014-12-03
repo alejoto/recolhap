@@ -27,6 +27,12 @@ Route::get('/help',function(){
 	return View::make('modules.includes.instructions');
 });
 
+Route::get('pwdreset/{token}','UserController@resetpwd');
+Route::post('pwdreset','UserController@savenewpassword');
+Route::post('newpwd','UserController@requestnewpwd');
+Route::controller('emailtest','EmailTesterController');
+
+
 Route::group(
 	array('before' => 'auth'), 
 	function() {

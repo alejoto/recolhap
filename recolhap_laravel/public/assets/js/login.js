@@ -116,9 +116,26 @@ $(function(){
 
     /*Triggering ajax for sending password to email*/
     $('#forgot_pwd').click(function(){
-		$.post("modules/login/rememberpwd.php",{usr:$('#usr').val()}, function(data2){
+    	var email=$('#usr').val().trim();
+    	var base=$('#base').html();
+    	$.post(base+'/newpwd',{email:email},function(d){
+    		if (d==1) {
+    			$('#msg').html('SE HA ENVIADO UN EMAIL CON LAS INSTRUCCIONES '
+    				+'PARA RESTABLECER CONTRASE&NTILDE;A.  REVISE LA BANDEJA '
+    				+'DE ENTRADA Y LA CARPETA SPAM (CORREO NO DESEADO)')
+    			;
+    			$('#forgot_pwd').hide('fast');
+    		} else if (d==2) {
+    			$('#msg').html('Cuenta correo inexistente. '
+    				+'Cierre este cuadro y abra "registrarse por primera vez" '
+    				+'o verifique el correo ingresado')
+    			;
+    			$('#forgot_pwd').hide('fast');
+    		}
+    	});
+		/*$.post("modules/login/rememberpwd.php",{usr:$('#usr').val()}, function(data2){
 			$("#msg").html(data2);
-		});
+		});*/
 	});
 
 

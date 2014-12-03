@@ -49,6 +49,7 @@
 						</div>
 					</div>
 				</div>
+				<a href="{{URL::to('patients/all')}}" class='text-info'>Ver lista de pacientes (restringido por institución)</a>
 			</div>
 		</form>
 		<div class="span6 offset1 ptn_right1">
@@ -152,12 +153,6 @@
 				<a href="" id='start_patient_register' class='btn btn-link'>Ir al registro</a>
 			</div>
 		</div>
-		
-		<h3>
-			<a href="{{URL::to('allpatients')}}">
-				VER TODOS SUS PACIENTES INGRESADOS
-			</a>
-		</h3>
 	</div>
 </div>
 @stop 
