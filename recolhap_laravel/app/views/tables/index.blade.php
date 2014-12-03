@@ -83,3 +83,7 @@
 	</table>
 </div>
 @stop
+
+@section('scripts')
+{{HTML::script('assets/js/summarytables.js');}}
+@stop

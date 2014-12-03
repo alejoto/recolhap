@@ -16,6 +16,19 @@ $(function(){
 		$('#alreadysubscribed_list').hide('fast');
 		$('#hide_already_subscribedlist').hide('fast');
 	});
+	
+	up_cas($('#newcityname'));
+	up_cas($('#newclinicname'));
+	up_cas($('#ivt_name'));
+	up_cas($('#ivt_surname'));
+	up_cas($('#ivt_doc'));
+	up_cas($('#ivt_mobile'));
+	
+
+
+
+
+
 	$('#city_recolhap').change(function(){
 		//
 		var city=$('#city_recolhap').val();

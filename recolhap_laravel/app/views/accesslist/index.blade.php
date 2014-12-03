@@ -4,17 +4,18 @@
 	<h1>
 		Administrador de accesos
 	</h1>
-	<h2>Usuarios activos</h2>
+
+	@if($rol<=3)
+		@include("accesslist.inactive")
+	@endif
+	@include("accesslist.regularinactive")
+	<hr>
 	@if($u->rol==1||$u->rol==2)
 		@include('accesslist.general_admin')
 	@endif
 	
 	@include("accesslist.regular")
 	<hr>
-	@if($rol<=3)
-	@include("accesslist.inactive")
-	@endif
-	@include("accesslist.regularinactive")
 	
 {{$u->investigator->hospital->hospital_name}}
 	edit permissions

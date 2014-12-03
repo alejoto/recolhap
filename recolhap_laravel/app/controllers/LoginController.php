@@ -22,11 +22,46 @@ class LoginController extends \BaseController {
 		Auth::logout();
 		return Redirect::to('/');
 	}
+
+	/**
+	* New user registration
+	*/
 	public function postRegister () {
 		$email=Input::get('mail');
 		if (User::whereEmail($email)->count()>0) {
 			return 1;
 		} else {
+			$email=Input::get('mail');
+			$pwd=Input::get('pwd1');
+
+			//save user
+			$u=new User;
+			$u->email=	$email;
+			$u->pwd=	Hash::make( $pwd );
+			$u->save();
+
+			//save investigator
+			$i=new Investigator;
+			$i->ivt_name=		Input::get('ivt_name');
+			$i->ivt_surname=	Input::get('ivt_surname');
+			$i->ivt_doc=		Input::get('ivt_doc');
+			$i->ivt_specialty=	Input::get('ivt_specialty');
+			$i->ivt_mobile=		Input::get('ivt_mobile');
+			$i->user_id=		$email;
+			$i->hospital_id=	Input::get('clinic_recolhap');
+			$i->save();
+			//
+
+			$auth=array(
+				'email' => $email, 
+				'password' => $pwd
+				)
+			;
+
+			//
+			if (  Auth::attempt( $auth )  ) {
+				return 2;
+			}
 			/*$mail=array(
 				'recipient'	=>'alejoto@gmail.com',
 				'name'		=>'Alejandro Toro'
@@ -50,7 +85,7 @@ class LoginController extends \BaseController {
 			;*/
 
 
-			$coord2='2.3';
+			/*$coord2='2.3';
 			$requester='4.3';
 			$tasks='t45.6';
 
@@ -77,7 +112,7 @@ class LoginController extends \BaseController {
 			    $message->to($maildata['recipient'],$maildata['r_name'])
 					->from($maildata['sender'],$maildata['s_name'])
 					->subject($maildata['subject']);
-			});
+			});*/
 
 			/*$mail='alejoto@gmail.com';
 			$subject='Collaborator left project';

@@ -12,6 +12,7 @@ class AccesslistController extends \BaseController {
 	{
 		if (Auth::user()->rol<=3) {
 			$u=Auth::user();
+			$hospital=$u->investigator->hospital->hospital_name;
 			$hid=$u->investigator->hospital_id;
 			$rol=$u->rol;
 			$admin=User::whereRol(2)->get();
@@ -22,6 +23,7 @@ class AccesslistController extends \BaseController {
 			return View::make('accesslist.index',
 				compact(
 					'u',
+					'hospital',
 					'rol',
 					'admin',
 					'coord',

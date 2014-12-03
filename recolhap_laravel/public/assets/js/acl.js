@@ -1,4 +1,5 @@
 $(function(){
+	$('#admin_users_btn').hide();
 	$('.profile').hide();
 	$('.confirminactivate').hide();
 	$('.confirm_activate').hide();
