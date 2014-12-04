@@ -77,6 +77,7 @@ class RightcathController extends \BaseController {
 		$rt_ventr_oxim=		Input::get('rt_ventr_oxim');
 		$pulm_artery=		Input::get('pulm_artery');
 		$heart_rate=		Input::get('heart_rate');
+		$vreac_test_done= 	Input::get('vreac_test_done');
 
 		$e=new Evaluation;
 		$e->patient_id=$patient_id;
@@ -105,6 +106,59 @@ class RightcathController extends \BaseController {
 		$r->heart_rate			=$heart_rate;
 		$r->eval_id				=$e_id;
 		$r->save();
+
+		$rid=$r->right_cathet_id;
+
+		if ($vreac_test_done=='si') {
+			$reactivity_date		=$rt_cat_date;
+			$reactivity				=Input::get('reactivity');
+			$test_drug				=Input::get('test_drug');
+			$post_res_vasc_pulm		=Input::get('post_res_vasc_pulm');
+			$post_res_vasc_pulm_unit=Input::get('post_res_vasc_pulm_unit');
+			$post_res_vasc_syst		=Input::get('post_res_vasc_syst');
+			$post_res_vasc_syst_unit=Input::get('post_res_vasc_syst_unit');
+			$post_pap_sys			=Input::get('post_pap_sys');
+			$post_pap_dias			=Input::get('post_pap_dias');
+			$post_pas_sys			=Input::get('post_pas_sys');
+			$post_pas_dias			=Input::get('post_pas_dias');
+			$post_rt_atr_press		=Input::get('post_rt_atr_press');
+			$post_pulm_wedg_press	=Input::get('post_pulm_wedg_press');
+			$post_pulm_gradient		=Input::get('post_pulm_gradient');
+			$post_cardiac_outp		=Input::get('post_cardiac_outp');
+			$post_cardiac_index		=Input::get('post_cardiac_index');
+			$post_rt_ventr_oxim		=Input::get('post_rt_ventr_oxim');
+			$post_pulm_artery		=Input::get('post_pulm_artery');
+			$post_rt_atr_oxim		=Input::get('post_rt_atr_oxim');
+			$post_heart_rate		=Input::get('post_heart_rate');
+			$eval_id				=$e_id;
+			$rightcath_id			=$rid;
+
+			$v=new Vasoreactivetest;
+			$v->reactivity_date		=$reactivity_date;
+			$v->reactivity			=$reactivity;
+			$v->test_drug			=$test_drug;
+			$v->post_res_vasc_pulm	=$post_res_vasc_pulm;
+			$v->post_res_vasc_pulm_unit	=$post_res_vasc_pulm_unit;
+			$v->post_res_vasc_syst	=$post_res_vasc_syst;
+			$v->post_res_vasc_syst_unit	=$post_res_vasc_syst_unit;
+			$v->post_pap_sys		=$post_pap_sys;
+			$v->post_pap_dias		=$post_pap_dias;
+			$v->post_pas_sys		=$post_pas_sys;
+			$v->post_pas_dias		=$post_pas_dias;
+			$v->post_rt_atr_press	=$post_rt_atr_press;
+			$v->post_pulm_wedg_press=$post_pulm_wedg_press;
+			$v->post_pulm_gradient	=$post_pulm_gradient;
+			$v->post_cardiac_outp	=$post_cardiac_outp;
+			$v->post_cardiac_index	=$post_cardiac_index;
+			$v->post_rt_ventr_oxim	=$post_rt_ventr_oxim;
+			$v->post_pulm_artery	=$post_pulm_artery;
+			$v->post_rt_atr_oxim	=$post_rt_atr_oxim;
+			$v->post_heart_rate		=$post_heart_rate;
+			$v->eval_id				=$eval_id;
+			$v->rightcath_id		=$rightcath_id;
+			$v->save();
+
+		}
 
 
 		return 1;

@@ -1,7 +1,9 @@
-<h2>Lista de usuarios inactivos</h2>
 
+<h2>Lista de usuarios inactivos</h2>
+<div class="muted">
+Su perfil de administrador, además de ingresar datos de pacientes a RECOLHAP, permite habilitar o restringir permisos a otros usuarios que se hayan suscrito al registro para alimentar la base de datos a nivel nacional.
+</div>
 @if($rol<=2)
-<h3>Administradores instituciones inactivos</h3>
 <div class="muted">Los siguientes médicos aunque están en el registro no pueden ingresar datos a la plataforma hasta que usted los active (botón "Activar")</div>
 <table class="table table-hover">
 	<tr>
@@ -44,5 +46,6 @@
 	@endforeach
 </table>
 @endif
+		
 
 <hr>

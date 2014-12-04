@@ -1,50 +1,87 @@
 $(function(){
-	//
-	$(document).ready(function() { $("#reactiv").hide(); });
+
 	$("#save_rt_cath").hide();
+	$("#reactiv").hide(); 
+	//
+	
 
 	$("#vreac_test_done").change(function(){
 		var vreac_test_done=$("#vreac_test_done").val();
 		if (vreac_test_done=="no") {
 			$("#save_rt_cath").show("fast");
+			$('#required_cardiac_output_for_reactivity_test').html('');
+			$("#reactiv").hide("fast");
 		} else if (vreac_test_done=="si"){
-			$("#save_rt_cath").hide("fast");
-			$("#basal").hide("fast");
-			$("#reactiv").show("fast");
+			var cardiac_outp=$('#cardiac_outp').val();
+			if (cardiac_outp=='') {
+				$('#cardiac_outp').focus();
+				$('#required_cardiac_output_for_reactivity_test').html(
+					'El gasto cardiaco es requerido <br><br>'
+					)
+				;
+			} else {
+				$("#save_rt_cath").hide("fast");
+				//$("#basal").hide("fast");
+				$("#reactiv").show("fast");
+			}
 		} else {
 			$("#save_rt_cath").hide("fast");
 		}
 	});
 
-	$('#save_rt_cath').click(function(e){
-		e.preventDefault();
+	function save_basal(){
 		var patient_id=$('#patient_id').val();
-		//var wholedate=$('#wholedate').val();
 		var year=$('#year').val();
 		var month=$('#month').val();
 		var day=$('#day').val();
 		//
-		var res_vasc_pulm=$('#res_vasc_pulm').val();
-		var res_vasc_pulm_unit=$('#res_vasc_pulm_unit').val();
-		var res_vasc_syst=$('#res_vasc_syst').val();
-		var res_vasc_syst=$('#res_vasc_syst').val();
-		var res_vasc_syst_unit=$('#res_vasc_syst_unit').val();
-		var pap_sys=$('#pap_sys').val();
-		var pap_dias=$('#pap_dias').val();
-		var pam_pulm=$('#pam_pulm').text();
-		var pas_sys=$('#pas_sys').val();
-		var pas_dias=$('#pas_dias').val();
-		var pam_stm=$('#pam_stm').text();
-		var rt_atr_press=$('#rt_atr_press').val();
-		var pulm_wedg_press=$('#pulm_wedg_press').val();
-		var pulm_gradient=$('#pulm_gradient').val();
-		var cardiac_outp=$('#cardiac_outp').val();
-		var cardiac_index=$('#cardiac_index').val();
-		var rt_atr_oxim=$('#rt_atr_oxim').val();
-		var rt_ventr_oxim=$('#rt_ventr_oxim').val();
-		var pulm_artery=$('#pulm_artery').val();
-		var heart_rate=$('#heart_rate').val();
+		var res_vasc_pulm=		$('#res_vasc_pulm').val();
+		var res_vasc_pulm_unit=	$('#res_vasc_pulm_unit').val();
+		var res_vasc_syst=		$('#res_vasc_syst').val();
+		var res_vasc_syst=		$('#res_vasc_syst').val();
+		var res_vasc_syst_unit=	$('#res_vasc_syst_unit').val();
+		var pap_sys=			$('#pap_sys').val();
+		var pap_dias=			$('#pap_dias').val();
+		var pam_pulm=			$('#pam_pulm').text();
+		var pas_sys=			$('#pas_sys').val();
+		var pas_dias=			$('#pas_dias').val();
+		var pam_stm=			$('#pam_stm').text();
+		var rt_atr_press=		$('#rt_atr_press').val();
+		var pulm_wedg_press=	$('#pulm_wedg_press').val();
+		var pulm_gradient=		$('#pulm_gradient').val();
+		var cardiac_outp=		$('#cardiac_outp').val();
+		var cardiac_index=		$('#cardiac_index').val();
+		var rt_atr_oxim=		$('#rt_atr_oxim').val();
+		var rt_ventr_oxim=		$('#rt_ventr_oxim').val();
+		var pulm_artery=		$('#pulm_artery').val();
+		var heart_rate=			$('#heart_rate').val();
+		var vreac_test_done=	$('#vreac_test_done').val();
+
+		//
+		var reactivity=$('#reactivity').val();
+		var test_drug=$('#test_drug').val();
+		var post_res_vasc_pulm=$('#post_res_vasc_pulm').val();
+		var post_res_vasc_pulm_unit=$('#post_res_vasc_pulm_unit').val();
+		var post_res_vasc_syst=$('#post_res_vasc_syst').val();
+		var post_res_vasc_syst_unit=$('#post_res_vasc_syst_unit').val();
+		var post_pap_sys=$('#post_pap_sys').val();
+		var post_pap_dias=$('#post_pap_dias').val();
+		var post_pas_sys=$('#post_pas_sys').val();
+		var post_pas_dias=$('#post_pas_dias').val();
+		var post_rt_atr_press=$('#post_rt_atr_press').val();
+		var post_pulm_wedg_press=$('#post_pulm_wedg_press').val();
+		var post_pulm_gradient=$('#post_pulm_gradient').val();
+		var post_cardiac_outp=$('#post_cardiac_outp').val();
+		var post_cardiac_index=$('#post_cardiac_index').val();
+		var post_rt_ventr_oxim=$('#post_rt_ventr_oxim').val();
+		var post_pulm_artery=$('#post_pulm_artery').val();
+		var post_rt_atr_oxim=$('#post_rt_atr_oxim').val();
+		var post_heart_rate=$('#post_heart_rate').val();
+
+		//required for post action
 		var base=$('#base').html();
+
+
 		$.post(
 			base+'/cath/patient',
 			{
@@ -70,16 +107,79 @@ $(function(){
 				,rt_ventr_oxim:rt_ventr_oxim
 				,pulm_artery:pulm_artery
 				,heart_rate:heart_rate
+				,vreac_test_done:vreac_test_done
+
+				//variables for vasoreactivity test
+				,reactivity:reactivity
+				,test_drug:test_drug
+				,post_res_vasc_pulm:post_res_vasc_pulm
+				,post_res_vasc_pulm_unit:post_res_vasc_pulm_unit
+				,post_res_vasc_syst:post_res_vasc_syst
+				,post_res_vasc_syst_unit:post_res_vasc_syst_unit
+				,post_pap_sys:post_pap_sys
+				,post_pap_dias:post_pap_dias
+				,post_pas_sys:post_pas_sys
+				,post_pas_dias:post_pas_dias
+				,post_rt_atr_press:post_rt_atr_press
+				,post_pulm_wedg_press:post_pulm_wedg_press
+				,post_pulm_gradient:post_pulm_gradient
+				,post_cardiac_outp:post_cardiac_outp
+				,post_cardiac_index:post_cardiac_index
+				,post_rt_ventr_oxim:post_rt_ventr_oxim
+				,post_pulm_artery:post_pulm_artery
+				,post_rt_atr_oxim:post_rt_atr_oxim
+				,post_heart_rate:post_heart_rate/**/
+
 			},
 			function(d){
 				if (d==1) {
-					$('#save_rt_cath').html('success');
+					//return 1;//
+					window.location.href=base+'/cath/show/'+patient_id;
 				}
 			}
 			)
-		;
-		//$(this).hide('fast');
+		;/**/
+	}
+
+	$('#save_rt_cath').click(function(e){
+		e.preventDefault();
+		var d=save_basal();
+		if (d==1) {
+			window.location.href=base+'/cath/show/'+patient_id;
+		}
 	});
+	
+	//showrt
+	hide_show_savebutton(
+		[
+		$("#year"),
+		$("#month"),
+		$("#day")
+		,$('#pap_sys')
+		,$('#pap_dias')
+		,$('#pulm_wedg_press')
+		], 
+		$('#showrt'));
+
+	$('#cardiac_outp').keyup(function(e){
+		//e.preventDefault();
+		var vreac_test_done=$('#vreac_test_done').val();
+		var cardiac_outp=$('#cardiac_outp').val();
+		if (cardiac_outp!='' && vreac_test_done=='si') {
+			$('#required_cardiac_output_for_reactivity_test').html('');
+			$('#reactiv').show('fast');
+			$('#save_rt_cath').hide('fast');
+		}
+	});
+
+	$('#react_save').click(function(e){
+		e.preventDefault();
+		var d=save_basal();
+		if (d==1) {
+			window.location.href=base+'/cath/show/'+patient_id;
+		}
+	});
+
 });
 /*Esconder formulario del test de vasorreactividad*/
 
@@ -96,11 +196,16 @@ hide_show_savebutton([$("#year"),$("#month"),$("#day")
 
 
 
-hide_show_savebutton([$('#post_pap_sys'),$('#post_pap_dias'),$('#post_pas_sys')
-
-	,$('#post_pas_dias'),$('#post_rt_atr_press'),$('#post_pulm_wedg_press')
-
-	,$('#post_cardiac_outp')], $('#react_save'));
+hide_show_savebutton(
+	[$('#post_pap_sys'),
+	$('#post_pap_dias'),
+	//$('#post_pas_sys'),
+	//$('#post_pas_dias'),
+	//$('#post_rt_atr_press'),
+	$('#post_pulm_wedg_press'),
+	$('#post_cardiac_outp')
+	],
+	$('#react_save'));
 
 
 
@@ -282,26 +387,3 @@ tiprequired($("#day"));
 
 
 
-/*	$('#day').keyup(function(){ show_react_test_question(); });
-
-	$('#res_vasc_pulm').keyup(function(){ show_react_test_question(); });
-
-	$('#res_vasc_syst').keyup(function(){ show_react_test_question(); });
-
-	$('#pap_sys').keyup(function(){ show_react_test_question(); });
-
-	$('#pap_dias').keyup(function(){ show_react_test_question(); });
-
-	$('#pas_sys').keyup(function(){ show_react_test_question(); });
-
-	$('#pas_dias').keyup(function(){ show_react_test_question(); });
-
-	$('#rt_atr_press').keyup(function(){ show_react_test_question(); });
-
-	$('#pulm_wedg_press').keyup(function(){ show_react_test_question(); });
-
-	$('#cardiac_outp').keyup(function(){ show_react_test_question(); });
-
-	$('#rt_atr_oxim').keyup(function(){ show_react_test_question(); });
-
-	$('#heart_rate').keyup(function(){ show_react_test_question(); });*/

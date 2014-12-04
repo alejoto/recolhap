@@ -37,7 +37,7 @@
 							</a>
 							@endif
 							<a href="{{URL::to('patients')}}" class="btn btn-inverse" id="change_patient_btn">
-								Cambiar paciente
+								Escoger paciente
 								<i class="icon-user icon-white"></i>
 							</a>
 							<a href="{{URL::to('tables')}}" class="btn btn-inverse" id="tables_btn">

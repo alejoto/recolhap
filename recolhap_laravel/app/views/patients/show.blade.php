@@ -8,29 +8,15 @@
 	<table class="table">
 		<tr>
 			<th>Tipo evaluacion (hacer click en tipo evaluación para ver detalle)</th>
-			<th>Numero de eventos</th>
-			<th>último evento (fecha realización)</th>
 		</tr>
 		<tr>
 			<td>
-				<a href="{{URL::to('cath/patient/'.$p->patient_id)}}">Cateterismo derecho </a>
-			</td>
-			<td>
-				3
-			</td>
-			<td>
-				2005/5/8
+				<a href="{{URL::to('cath/show/'.$p->patient_id)}}">Cateterismo derecho </a>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<a href="">Examen clinico (dentro de RECOLHAP)</a>
-			</td>
-			<td>
-				5
-			</td>
-			<td>
-				2011/8/30
+				<a href="">Parámetros clinicos </a>
 			</td>
 		</tr>
 	</table>

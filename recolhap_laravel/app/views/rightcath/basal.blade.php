@@ -134,19 +134,20 @@
 		</div>
 	</div>
 	<div class="row">
-
-		<div class="span2" style="text-align:right"  
-		data-toggle='tooltip' title='Campo obligatorio!'>
-		Gasto cardiaco
-		<spam class="text-info">(*)</spam>
-	</div>
-
-	<div class="span2">
-		<div class="input-append">
-			<input type="text" id="cardiac_outp" placeholder="CO-lt/min" class="span2 bas" name="cardiac_outp"><span class="add-on">Lt/min</span>
+		<div class="span2" style="text-align:right" data-toggle='tooltip' title='Campo obligatorio!'>
+			Gasto cardiaco
+			<spam class="text-info">(*)</spam>
+		</div>
+		<div class="span2">
+			<div class="input-append">
+				<input type="text" id="cardiac_outp" placeholder="CO-lt/min" class="span2 bas" name="cardiac_outp">
+				<span class="add-on">Lt/min</span>
+			</div>
 		</div>
 	</div>
-</div>
+	<div class="row">
+		<div class="offset1 span4 text-error" id="required_cardiac_output_for_reactivity_test"></div>
+	</div>
 <div class="row">
 	<div class="span2" style="text-align:right">&Iacute;ndice cardiaco</div>
 	<div class="span2">
@@ -204,17 +205,11 @@
 	<div class="span2" style="text-align:right">Se hizo test vasorreactividad?</div>
 
 	<div class="span2">
-
 		<select id="vreac_test_done" class="span2">
-
 			<option value=""></option>
-
 			<option value="no">no</option>
-
 			<option value="si">si</option>
-
 		</select>
-
 	</div>
 
 </div>

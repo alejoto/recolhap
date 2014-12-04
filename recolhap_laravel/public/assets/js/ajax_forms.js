@@ -292,7 +292,7 @@ function get_info(info_id){
 
 */
 
-function check_date(column_name,table_name,date){
+/*function check_date(column_name,table_name,date){
 
 	
 
@@ -322,7 +322,7 @@ function check_date(column_name,table_name,date){
 
 	$.ajaxSetup({async: true});
 
-}
+}*/
 
 
 
@@ -358,7 +358,7 @@ $(".date3").change(function(){
 
 	//alert(check_date(column_name, table_name, date));
 
-	if (!check_date(column_name, table_name, date)){
+	/*if (!check_date(column_name, table_name, date)){
 
 		$(this).val("");
 
@@ -390,7 +390,7 @@ $(".date3").change(function(){
 
 
 
-	}	
+	}	*/
 
 });
 
@@ -714,7 +714,7 @@ $("#legsdoppler_save").click(function(){
 
 
 
-$("#vreac_test_done").change(function(){
+/*$("#vreac_test_done").change(function(){
 
 	if (this.value == "si") {
 
@@ -724,21 +724,21 @@ $("#vreac_test_done").change(function(){
 
 		//reset_fields("bas");  
 
-		/*data cannot be reseted: needed for react_test 
+		///data cannot be reseted: needed for react_test 
 
-		*calculations
+		//calculations
 
-		*/
+		
 
 		$("#vreac_test_done").hide();
 
 	}
 
-});
+});*/
 
 
 
-$("#react_save").click(function(){
+/*$("#react_save").click(function(){
 
 	var info = get_info("react");
 
@@ -754,7 +754,7 @@ $("#react_save").click(function(){
 
 	//window.location.href = "myaccount.php?page=diagnostic";
 
-});
+});*/
 
 
 

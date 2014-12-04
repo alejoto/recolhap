@@ -31,6 +31,14 @@
     <!-- main content-->
     <div class="span9" style="margin-top: 40px;">
         <div class="row">
+            <div class="span12">
+                <a href="{{URL::to('cath/show/'.$patient_id)}}" class="text-info">
+                    <i class="icon-share-alt "></i>
+                    VOLVER A LISTA CATETERISMO DERECHO</a>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
         	@include('layouts.patientinfo')
         </div>
         <br/>
