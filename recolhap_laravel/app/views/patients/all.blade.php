@@ -22,7 +22,8 @@
 				<tr>
 					<td>
 						<spam class="muted"> {{$p->patient_id}}</spam>
-						{{$p->name}} {{$p->surn}}
+						<a href="{{URL::to('patients/patient/'.$p->patient_id)}}" class="text-info">{{$p->name}} {{$p->surn}}</a>
+						
 					</td>
 					<td>
 						{{$p->timestamp}}

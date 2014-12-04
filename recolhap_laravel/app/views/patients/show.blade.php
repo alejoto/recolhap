@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="container recolhap_left">
+	<a href="{{URL::to('patients/all')}}" class='text-info'>Volver a listado de pacientes</a>
 	<h1>Paciente {{$p->name}} {{$p->surn}}</h1>
 	<h3 class="muted">Documento {{$p->patient_id}}</h3>
 	<table class="table">

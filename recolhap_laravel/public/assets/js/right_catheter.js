@@ -1,33 +1,96 @@
 $(function(){
-    //
-    $(document).ready(function() { $("#reactiv").hide(); });
-    $("#save_rt_cath").hide();
+	//
+	$(document).ready(function() { $("#reactiv").hide(); });
+	$("#save_rt_cath").hide();
 
-    $("#vreac_test_done").change(function(){
-        var vreac_test_done=$("#vreac_test_done").val();
-        if (vreac_test_done=="no") {
-            $("#save_rt_cath").show("fast");
-        } else if (vreac_test_done=="si"){
-            $("#save_rt_cath").hide("fast");
-            $("#basal").hide("fast");
-            $("#reactiv").show("fast");
-        } else {
-            $("#save_rt_cath").hide("fast");
-        }
-    });
+	$("#vreac_test_done").change(function(){
+		var vreac_test_done=$("#vreac_test_done").val();
+		if (vreac_test_done=="no") {
+			$("#save_rt_cath").show("fast");
+		} else if (vreac_test_done=="si"){
+			$("#save_rt_cath").hide("fast");
+			$("#basal").hide("fast");
+			$("#reactiv").show("fast");
+		} else {
+			$("#save_rt_cath").hide("fast");
+		}
+	});
+
+	$('#save_rt_cath').click(function(e){
+		e.preventDefault();
+		var patient_id=$('#patient_id').val();
+		//var wholedate=$('#wholedate').val();
+		var year=$('#year').val();
+		var month=$('#month').val();
+		var day=$('#day').val();
+		//
+		var res_vasc_pulm=$('#res_vasc_pulm').val();
+		var res_vasc_pulm_unit=$('#res_vasc_pulm_unit').val();
+		var res_vasc_syst=$('#res_vasc_syst').val();
+		var res_vasc_syst=$('#res_vasc_syst').val();
+		var res_vasc_syst_unit=$('#res_vasc_syst_unit').val();
+		var pap_sys=$('#pap_sys').val();
+		var pap_dias=$('#pap_dias').val();
+		var pam_pulm=$('#pam_pulm').text();
+		var pas_sys=$('#pas_sys').val();
+		var pas_dias=$('#pas_dias').val();
+		var pam_stm=$('#pam_stm').text();
+		var rt_atr_press=$('#rt_atr_press').val();
+		var pulm_wedg_press=$('#pulm_wedg_press').val();
+		var pulm_gradient=$('#pulm_gradient').val();
+		var cardiac_outp=$('#cardiac_outp').val();
+		var cardiac_index=$('#cardiac_index').val();
+		var rt_atr_oxim=$('#rt_atr_oxim').val();
+		var rt_ventr_oxim=$('#rt_ventr_oxim').val();
+		var pulm_artery=$('#pulm_artery').val();
+		var heart_rate=$('#heart_rate').val();
+		var base=$('#base').html();
+		$.post(
+			base+'/cath/patient',
+			{
+				patient_id:patient_id
+				//,wholedate:wholedate
+				,year:year
+				,month:month
+				,day:day
+				,res_vasc_pulm:res_vasc_pulm
+				,res_vasc_pulm_unit:res_vasc_pulm_unit
+				,res_vasc_syst:res_vasc_syst
+				,res_vasc_syst_unit:res_vasc_syst_unit
+				,pap_sys:pap_sys
+				,pap_dias:pap_dias
+				,pas_sys:pas_sys
+				,pas_dias:pas_dias
+				,rt_atr_press:rt_atr_press
+				,pulm_wedg_press:pulm_wedg_press
+				,pulm_gradient:pulm_gradient
+				,cardiac_outp:cardiac_outp
+				,cardiac_index:cardiac_index
+				,rt_atr_oxim:rt_atr_oxim
+				,rt_ventr_oxim:rt_ventr_oxim
+				,pulm_artery:pulm_artery
+				,heart_rate:heart_rate
+			},
+			function(d){
+				if (d==1) {
+					$('#save_rt_cath').html('success');
+				}
+			}
+			)
+		;
+		//$(this).hide('fast');
+	});
 });
 /*Esconder formulario del test de vasorreactividad*/
 
 hide_show_savebutton([$("#year"),$("#month"),$("#day")
 
-    ,$('#pap_sys')
-    ,$('#pap_dias')
-
+	,$('#pap_sys')
+	,$('#pap_dias')
     //,$('#pas_sys')
     //,$('#pas_dias')
     //,$('#rt_atr_press')
     ,$('#pulm_wedg_press')
-
     //,$('#cardiac_outp')
     ], $('#ask_for_react_test'));
 
@@ -35,9 +98,9 @@ hide_show_savebutton([$("#year"),$("#month"),$("#day")
 
 hide_show_savebutton([$('#post_pap_sys'),$('#post_pap_dias'),$('#post_pas_sys')
 
-    ,$('#post_pas_dias'),$('#post_rt_atr_press'),$('#post_pulm_wedg_press')
+	,$('#post_pas_dias'),$('#post_rt_atr_press'),$('#post_pulm_wedg_press')
 
-    ,$('#post_cardiac_outp')], $('#react_save'));
+	,$('#post_cardiac_outp')], $('#react_save'));
 
 
 
@@ -47,21 +110,21 @@ hide_show_savebutton([$('#post_pap_sys'),$('#post_pap_dias'),$('#post_pas_sys')
 
 icon_exchanger($(".main_icon"),$("#basic_eval"),$("#blood_test"),$("#performance"),$("#clin_images")
 
-              ,'0  75px','-92px 75px','-184px 75px','-276px 0','Evaluaci&oacute;n <br>cl&iacute;nica',
+	,'0  75px','-92px 75px','-184px 75px','-276px 0','Evaluaci&oacute;n <br>cl&iacute;nica',
 
-              'Pruebas<br>en sangre','Desempe&ntilde;o cardiovascular','Im&aacute;genes<br/>diagn&oacute;sticas');
-
-
+	'Pruebas<br>en sangre','Desempe&ntilde;o cardiovascular','Im&aacute;genes<br/>diagn&oacute;sticas');
 
 
 
-    /*Next lines execute prevoius functions */
 
-    
 
-    clickhideshow($("#showrt"), $("#basal"), $("#reactiv"));
+/*Next lines execute prevoius functions */
 
-    clickhideshow($("#showbas"), $("#reactiv"), $("#basal"));
+
+
+clickhideshow($("#showrt"), $("#basal"), $("#reactiv"));
+
+clickhideshow($("#showbas"), $("#reactiv"), $("#basal"));
 
 
 
@@ -97,89 +160,89 @@ hmd_dateformat($("#year"),$("#month"),$("#day"));
 
 
 
-    num_ranges($("#year"), 2020, 2010, 0);
+num_ranges($("#year"), 2020, 2010, 0);
 
-    num_ranges($("#wgt"), 250, 0, 0);
+num_ranges($("#wgt"), 250, 0, 0);
 
-    num_ranges($("#hgt"), 3, 0, 1);
+num_ranges($("#hgt"), 3, 0, 1);
 
-    num_ranges($("#res_vasc_pulm"), 5000, 0, 0);
+num_ranges($("#res_vasc_pulm"), 5000, 0, 0);
 
-    num_ranges($("#res_vasc_syst"), 5000, 0, 0);
+num_ranges($("#res_vasc_syst"), 5000, 0, 0);
 
-    num_ranges($("#pap_sys"), 300, 0, 0);
+num_ranges($("#pap_sys"), 300, 0, 0);
 
-    num_ranges($("#pap_dias"), 300, 0, 0);
+num_ranges($("#pap_dias"), 300, 0, 0);
 
-    num_ranges($("#pas_sys"), 300, 0, 0);
+num_ranges($("#pas_sys"), 300, 0, 0);
 
-    num_ranges($("#pas_dias"), 300, 0, 0);
+num_ranges($("#pas_dias"), 300, 0, 0);
 
-    num_ranges($("#rt_atr_press"), 300, 0, 0);
+num_ranges($("#rt_atr_press"), 300, 0, 0);
 
-    num_ranges($("#pulm_wedg_press"), 300, 0, 0);
+num_ranges($("#pulm_wedg_press"), 300, 0, 0);
 
-    num_ranges($("#its_right"), 50, 0);
+num_ranges($("#its_right"), 50, 0);
 
-    num_ranges($("#its_left"), 100, 0);
+num_ranges($("#its_left"), 100, 0);
 
-    num_ranges($("#cardiac_outp"), 30, 0, 1);
+num_ranges($("#cardiac_outp"), 30, 0, 1);
 
-    num_ranges($("#rt_atr_oxim"), 100, 0, 0);
+num_ranges($("#rt_atr_oxim"), 100, 0, 0);
 
-    num_ranges($("#rt_ventr_oxim"), 100, 0, 0);
+num_ranges($("#rt_ventr_oxim"), 100, 0, 0);
 
-    num_ranges($("#pulm_artery"), 100, 0, 0);
+num_ranges($("#pulm_artery"), 100, 0, 0);
 
-    num_ranges($("#heart_rate"), 550, 0, 0);
-
-
-
-    
-
-    num_ranges($("#post_res_vasc_pulm"), 5000, 0, 0);
-
-    num_ranges($("#post_res_vasc_syst"), 5000, 0, 0);
-
-    num_ranges($("#post_pap_sys"), 300, 0, 0);
-
-    num_ranges($("#post_pap_dias"), 300, 0, 0);
-
-    num_ranges($("#post_pas_sys"), 300, 0, 0);
-
-    num_ranges($("#post_pas_dias"), 300, 0, 0);
-
-    num_ranges($("#post_rt_atr_press"), 300, 0, 0);
-
-    num_ranges($("#post_pulm_wedg_press"), 300, 0, 0);
-
-    num_ranges($("#post_pulm_gradient"), 300, 0, 0);
-
-    num_ranges($("#post_its_right"), 50, 0);
-
-    num_ranges($("#post_its_left"), 100, 0);
-
-    num_ranges($("#post_cardiac_outp"), 30, 0, 1);
-
-    num_ranges($("#post_rt_atr_oxim"), 100, 0, 0);
-
-    num_ranges($("#post_rt_ventr_oxim"), 100, 0, 0);
-
-    num_ranges($("#post_pulm_artery"), 100, 0, 0);
-
-    num_ranges($("#post_heart_rate"), 550, 0, 0);
+num_ranges($("#heart_rate"), 550, 0, 0);
 
 
 
-    samevalue($("#year"), $("#year2"));
-
-    samevalue($("#month"), $("#month2"));
-
-    samevalue($("#day"), $("#day2"));
 
 
+num_ranges($("#post_res_vasc_pulm"), 5000, 0, 0);
 
-    tiprequired($("#day"));
+num_ranges($("#post_res_vasc_syst"), 5000, 0, 0);
+
+num_ranges($("#post_pap_sys"), 300, 0, 0);
+
+num_ranges($("#post_pap_dias"), 300, 0, 0);
+
+num_ranges($("#post_pas_sys"), 300, 0, 0);
+
+num_ranges($("#post_pas_dias"), 300, 0, 0);
+
+num_ranges($("#post_rt_atr_press"), 300, 0, 0);
+
+num_ranges($("#post_pulm_wedg_press"), 300, 0, 0);
+
+num_ranges($("#post_pulm_gradient"), 300, 0, 0);
+
+num_ranges($("#post_its_right"), 50, 0);
+
+num_ranges($("#post_its_left"), 100, 0);
+
+num_ranges($("#post_cardiac_outp"), 30, 0, 1);
+
+num_ranges($("#post_rt_atr_oxim"), 100, 0, 0);
+
+num_ranges($("#post_rt_ventr_oxim"), 100, 0, 0);
+
+num_ranges($("#post_pulm_artery"), 100, 0, 0);
+
+num_ranges($("#post_heart_rate"), 550, 0, 0);
+
+
+
+samevalue($("#year"), $("#year2"));
+
+samevalue($("#month"), $("#month2"));
+
+samevalue($("#day"), $("#day2"));
+
+
+
+tiprequired($("#day"));
 
     //tiprequired($("#day2"));
 
@@ -219,26 +282,26 @@ hmd_dateformat($("#year"),$("#month"),$("#day"));
 
 
 
-    $('#day').keyup(function(){ show_react_test_question(); });
+/*	$('#day').keyup(function(){ show_react_test_question(); });
 
-    $('#res_vasc_pulm').keyup(function(){ show_react_test_question(); });
+	$('#res_vasc_pulm').keyup(function(){ show_react_test_question(); });
 
-    $('#res_vasc_syst').keyup(function(){ show_react_test_question(); });
+	$('#res_vasc_syst').keyup(function(){ show_react_test_question(); });
 
-    $('#pap_sys').keyup(function(){ show_react_test_question(); });
+	$('#pap_sys').keyup(function(){ show_react_test_question(); });
 
-    $('#pap_dias').keyup(function(){ show_react_test_question(); });
+	$('#pap_dias').keyup(function(){ show_react_test_question(); });
 
-    $('#pas_sys').keyup(function(){ show_react_test_question(); });
+	$('#pas_sys').keyup(function(){ show_react_test_question(); });
 
-    $('#pas_dias').keyup(function(){ show_react_test_question(); });
+	$('#pas_dias').keyup(function(){ show_react_test_question(); });
 
-    $('#rt_atr_press').keyup(function(){ show_react_test_question(); });
+	$('#rt_atr_press').keyup(function(){ show_react_test_question(); });
 
-    $('#pulm_wedg_press').keyup(function(){ show_react_test_question(); });
+	$('#pulm_wedg_press').keyup(function(){ show_react_test_question(); });
 
-    $('#cardiac_outp').keyup(function(){ show_react_test_question(); });
+	$('#cardiac_outp').keyup(function(){ show_react_test_question(); });
 
-    $('#rt_atr_oxim').keyup(function(){ show_react_test_question(); });
+	$('#rt_atr_oxim').keyup(function(){ show_react_test_question(); });
 
-    $('#heart_rate').keyup(function(){ show_react_test_question(); });
+	$('#heart_rate').keyup(function(){ show_react_test_question(); });*/

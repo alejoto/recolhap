@@ -31,8 +31,6 @@ class PatientsController extends \BaseController {
 			foreach ($clinic->investigator as $i) {
 				$q->orWhere('digiter_id','=',$i->user_id);
 			}
-			//
-			//
 		});
 		return View::make(
 			'patients.all',

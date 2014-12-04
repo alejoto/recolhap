@@ -49,7 +49,7 @@
 						</div>
 					</div>
 				</div>
-				<a href="{{URL::to('patients/all')}}" class='text-info'>Ver lista de pacientes (restringido por institución)</a>
+				<a href="{{URL::to('patients/all')}}" class='text-info'>Ver lista de pacientes ( {{Auth::user()->investigator->hospital->hospital_name}})</a>
 			</div>
 		</form>
 		<div class="span6 offset1 ptn_right1">
