@@ -29,6 +29,34 @@
 		<b>{{$dxtype}}</b>
 	</div>
 </div>
+
+<div class="row">
+	<div class="span2">Hipercoagulabilidad</div>
+	<div class="span4">
+		<b>
+			@if($eval_hyperclott->count()>0)
+				<?php $comma=''; ?>
+				@foreach($hyperclot as $h)
+					@if($eval_hyperclott->first()->hyperclotting->$h[0]=='true')
+						{{$comma.$h[1]}}
+						<?php $comma=', '; ?>
+					@endif
+				@endforeach
+				- {{$eval_hyperclott->first()->hyperclotting->other_hyperclott_disord}}
+				<a href="{{URL::to('patient/'.$patient_id.'/hypercloating')}}" class='text-info'>(Modificar)</a>
+			@else 
+			<a href="{{URL::to('patient/'.$patient_id.'/hypercloating')}}" class='text-info'>Agregar</a>
+			@endif
+		</b>
+		
+	</div>
+</div>
+<div class="row">
+	<div class="span2">Tratamiento</div>
+	<div class="span4">
+		<a href="#treatments_table" class="text-info">Ir a tabla tratamientos</a>
+	</div>
+</div>
 <hr>
 <h3 id="left_title">Evaluaciones Clínicas</h3>
 
@@ -123,6 +151,18 @@
 
 	@endif
 </table>
+<div id="treatments_table">
+	<h3>Historial de tratamientos médicos y quirúrgicos</h3>
+	<a href="{{URL::to('patient/'.$patient_id.'/treatment')}}" class="text-info">Agregar manejo</a>
+	<table class="table table-hover">
+		<tr>
+			<th>Tipos de manejo</th>
+			<th>Fecha inicio</th>
+			<th>Fecha finalización</th>
+			<th>Observaciones</th>
+		</tr>
+	</table>
+</div>
 
 @stop
 

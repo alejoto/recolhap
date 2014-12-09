@@ -45,6 +45,11 @@ Route::group(
 					array('before'=>'cath'),
 					function () {
 						Route::resource('patient.clinic','ClinicController');
+						Route::get('patient/{patient}/hyperclotting','ClinicController@hyperclotting');
+						Route::post('patient/{patient}/hyperclotting','ClinicController@savehyperclott');
+						Route::get('patient/{patient}/treatment','ClinicController@treatment');
+						Route::post('patient/{patient}/treatment','ClinicController@savetreatment');
+						Route::post('patient/{patient}/updatetreatment','ClinicController@updatetreatment');
 						Route::resource('patient.blood','BloodController');
 						Route::resource('patient.imaging','ImagingController');
 						Route::resource('patient.performance','PerformanceController');

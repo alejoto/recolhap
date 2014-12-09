@@ -28,7 +28,7 @@ hide_show_savebutton([$("#year_ev"),$("#month_ev"),$("#day_ev"),$("#nyha_funct_c
 
 hide_show_savebutton([$("#pulse"),$("#breathing"),$("#psist"),$("#pdiast")], $("#ef_save"));
 
-hide_show_savebutton([$("#drug"),$("#year_ini_d"),$("#month_ini_d"),$("#day_ini_d")], $("#save_cancel_drug"));
+//hide_show_savebutton([$("#drug"),$("#year_ini_d"),$("#month_ini_d"),$("#day_ini_d")], $("#save_cancel_drug"));
 
 hide_show_savebutton([$("#year_death"),$("#month_death"),$("#day_death"),$("#dead_cause")], $("#outcome_save"));
 
@@ -92,15 +92,15 @@ $("#transplant").change(function(){
 
 $(document).ready(function() {
 
-	$("#inputdrug").hide();
+	//$("#inputdrug").hide();
 
-	$("#drug_adv_event").hide();
+	//$("#drug_adv_event").hide();
 
-	$("#year_transp").hide();
+	//$("#year_transp").hide();
 
-	$(".susp_date").next().hide();
+	//$(".susp_date").next().hide();
 
-	$(".alert").hide(); 
+	//$(".alert").hide(); 
 
 });
 
@@ -158,7 +158,7 @@ function date_pharmac(input){
 
  /* "Add drug" toggle effect */
 
- $("#ad_drug").click(function(){
+/* $("#ad_drug").click(function(){
 
 	$("#inputdrug").toggle("fast");
 
@@ -166,11 +166,11 @@ function date_pharmac(input){
 
 	else {$("#ad_drug").html("Ocultar");}
 
- });
+ });*/
 
- $('#hide_drug_hap').click(function(){
+ //$('#hide_drug_hap').click(function(){
 
-	$('#inputdrug').hide();
+	/*$('#inputdrug').hide();
 
 	$("#ad_drug").html("<i class='icon-plus-sign'></i> A&ntilde;adir");
 
@@ -180,11 +180,11 @@ function date_pharmac(input){
 
 	$('#month_ini_d').val('');
 
-	$('#day_ini_d').val('');
+	$('#day_ini_d').val('');*/
 
   //           
 
-});
+//});
 
 
 
@@ -512,9 +512,9 @@ function enter_drug_toDB(confirm){
 
 
 
-$('#btn_add_drug').click(function(){enter_drug_toDB('');});
+//$('#btn_add_drug').click(function(){enter_drug_toDB('');});
 
-$("#day_ini_d").keyup(function(event){if(event.keyCode == 13){enter_drug_toDB('');} });
+//$("#day_ini_d").keyup(function(event){if(event.keyCode == 13){enter_drug_toDB('');} });
 
 
 
@@ -528,7 +528,7 @@ $('#reconfirm_drugsave').click(function(){
 
 
 
-$('#cancel_duplicated_drug').click(function(){
+/*$('#cancel_duplicated_drug').click(function(){
 
 	$('#inputdrug').hide();
 
@@ -544,7 +544,7 @@ $('#cancel_duplicated_drug').click(function(){
 
 	$('#drug_already_exist').hide();
 
-});
+});*/
 
 
 
@@ -850,7 +850,7 @@ hmd_dateformat($("#year_ev"),$("#month_ev"),$("#day_ev"));
 
 /*treatment and trasplantation dates*/
 
-hmd_dateformat($("#year_ini_d"),$("#month_ini_d"),$("#day_ini_d"));
+//hmd_dateformat($("#year_ini_d"),$("#month_ini_d"),$("#day_ini_d"));
 
 hmd_dateformat($("#year_end_d"),$("#month_end_d"),$("#day_end_d"));
 
@@ -898,7 +898,7 @@ num_ranges($("#month"), 12, 1,0);
 
 num_ranges($("#year_ev"), d.getFullYear(), 1990,0);
 
-num_ranges($("#year_ini_d"), d.getFullYear(), 1990,0);
+//num_ranges($("#year_ini_d"), d.getFullYear(), 1990,0);
 
 num_ranges($("#year_end_d"), d.getFullYear(), 1990,0);
 

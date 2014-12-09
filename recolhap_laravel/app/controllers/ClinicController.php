@@ -34,6 +34,17 @@ class ClinicController extends AgeController {
 		}
 		$followup=Evaluation::where('patient_id','=',$patient_id)
 		->has('followqup');
+		$eval_hyperclott=Evaluation::where('patient_id','=',$patient_id)
+		->has('hyperclotting');
+		$hyperclot='antiphs_syndr|Síndrome antifosfolípido,protr20210_mutation|Mutación gen prot 20210,'.
+		'c_protein_resist|Resistencia a la proteina C act,antitrbiii_deficiency|Deficiencia antitrombina III,prot_s_deficiency|Deficiencia proteína S,'.
+		'prot_c_deficiency|Deficiencia proteína C,unspecific_tromboph|Trombofilia no específica,hyperhomocist|Hiperhomocisteinemia,'.
+		'neoplasia|Enfermedad neoplásica,esplenectomy|Esplenectomizado';
+		$hyperclot=explode(',', $hyperclot);
+		foreach ($hyperclot as $key => $value) {
+			$value=explode('|',$value);
+			$hyperclot[$key]=$value;
+		}
 		$p=Patient::find($patient_id);
 		$age=$this->age($p->birthd);
 		return View::make(
@@ -47,7 +58,9 @@ class ClinicController extends AgeController {
 				'f_year',
 				'afro',
 				'dxtype',
-				'followup'
+				'followup',
+				'eval_hyperclott',
+				'hyperclot'
 				)
 			)
 		;
@@ -107,6 +120,125 @@ class ClinicController extends AgeController {
 				)
 			)
 		;
+	}
+
+	public function hyperclotting ($patient_id) {
+		$eval_hyperclott=Evaluation::where('patient_id','=',$patient_id)
+		->has('hyperclotting');
+		$p=Patient::find($patient_id);
+		$age=$this->age($p->birthd);
+		return View::make('clinical.hyperclot',
+			compact(
+				'eval_hyperclott',
+				'patient_id',
+				'p',
+				'age'
+				)
+			);
+	}
+
+	public function savehyperclott ($patient_id) {
+		$eval_hyperclott=Evaluation::where('patient_id','=',$patient_id)
+		->has('hyperclotting');
+		//$patient_id=
+		$hyperclot='antiphs_syndr,protr20210_mutation,'.
+		'c_protein_resist,antitrbiii_deficiency,prot_s_deficiency,'.
+		'prot_c_deficiency,unspecific_tromboph,hyperhomocist,'.
+		'neoplasia,esplenectomy,other_hyperclott_disord';
+		$hyperclot=explode(',', $hyperclot);
+
+		/*if ($eval_hyperclott->get()==null) {
+			$check='null';
+		} else {$check='mmm, not null';}*/
+
+		if ($eval_hyperclott->first()!=null) {
+			$h_id=$eval_hyperclott
+			->first()
+			->hyperclotting
+			->hyperclotting_id;
+			$h=Hyperclotting::find($h_id);
+			foreach ($hyperclot as $y) {
+				$h->$y=Input::get($y);
+			}
+			$h->save();
+		} else {
+			$e=new Evaluation;
+			$e->patient_id=$patient_id;
+			$e->digiter_id=Auth::user()->email;
+			$e->save();
+			$e_id=$e->eval_id;
+
+			$h=new Hyperclotting;
+			foreach ($hyperclot as $y) {
+				$h->$y=Input::get($y);
+			}
+			$h->eval_id=$e_id;
+			$h->save();
+		}
+		//
+		return 1;//$hyperclot;
+	}
+
+	public function treatment ($patient_id) {
+		$eval_treatment=Evaluation::where('patient_id','=',$patient_id)
+		->has('drugqtreatment');
+		//$treatment='';
+		$p=Patient::find($patient_id);
+		$age=$this->age($p->birthd);
+		return View::make('clinical.treatment',
+			compact(
+				'eval_treatment',
+				'patient_id',
+				'p',
+				'age'
+				)
+			)
+		;
+	}
+
+	public function savetreatment ($patient_id) {
+
+		$patient=	Input::get('patient');
+		$drug=		Input::get('drug');
+		$confirm=	Input::get('confirm');
+		$drugdate=	Input::get('drugdate');
+
+		$eval_treatment=Evaluation::where('patient_id','=',$patient_id)
+		->whereHas('drugqtreatment',function($q) use($drug){
+			$q->whereDrug($drug);
+		});
+
+		if ($eval_treatment->count()==0) {
+			$e=new Evaluation;
+			$e->patient_id=$patient_id;
+			$e->digiter_id=Auth::user()->email;
+			$e->save();
+			$e_id=$e->eval_id;
+
+			//
+			$d=new Drugqtreatment;
+			$d->drug=		$drug;
+			$d->drug_ini=	$drugdate;
+			$d->eval_id=	$e_id;
+			$d->save();
+			return 1;
+		} else {
+			return 2;
+		}
+	}
+
+	public function updatetreatment ($patient_id){
+		$id 			= Input::get('rowid');
+		$drug_end		= Input::get('col2val');
+		$suspend_cause 	= Input::get('col1val');
+		//$table 			= Input::get('table');
+
+		$d=Drugqtreatment::find($id);
+		$d->suspend_cause 	= $suspend_cause;
+		$d->drug_end 		= $drug_end;
+		$d->save();
+
+		return 1;
 	}
 
 
