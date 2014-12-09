@@ -1,15 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
+
 
 Route::get('/', function()
 {
@@ -39,16 +30,44 @@ Route::group(
 		Route::group(
 			array('before'=>'addhospital|complete|noactiveyet'),
 			function(){
-				Route::controller('patients','PatientsController');
+				//
+				//Active-hospital patients routes
+				Route::resource('activehospital/patient','ActivehospitalPatientController');
+				Route::get('search','ActivehospitalPatientController@search');
+				Route::post('search','ActivehospitalPatientController@postsearch');
+				Route::get('patientexist','ActivehospitalPatientController@exist');
+
+				//Right catheter routes
+				Route::resource('patient.cath','RightcathController');
+
+				//"Post catheter" routes (right catheter must be set first)
+				Route::group(
+					array('before'=>'cath'),
+					function () {
+						Route::resource('patient.clinic','ClinicController');
+						Route::resource('patient.blood','BloodController');
+						Route::resource('patient.imaging','ImagingController');
+						Route::resource('patient.performance','PerformanceController');
+					}
+					)
+				;
+
+				//
 				Route::controller('tables','TablesController');
-				Route::controller('cath','RightcathController');
+				//Route::controller('cath','RightcathController');
 			}
 			)
 		;
 		
 		Route::controller('complete','CompletedataController');
+
+		//resource controllers
 		Route::resource('accesslist','AccesslistController');
 		Route::resource('user','UserController');
+
+		//lonely actions
+		
+
 		Route::post('activate', 'UserController@activate');
 		Route::post('inactivate', 'UserController@inactivate');
 

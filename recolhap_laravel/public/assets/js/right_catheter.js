@@ -83,7 +83,7 @@ $(function(){
 
 
 		$.post(
-			base+'/cath/patient',
+			base+'/patient/'+patient_id+'/cath',
 			{
 				patient_id:patient_id
 				//,wholedate:wholedate
@@ -134,7 +134,7 @@ $(function(){
 			function(d){
 				if (d==1) {
 					//return 1;//
-					window.location.href=base+'/cath/show/'+patient_id;
+					window.location.href=base+'/patient/'+patient_id+'/cath';
 				}
 			}
 			)
@@ -145,7 +145,7 @@ $(function(){
 		e.preventDefault();
 		var d=save_basal();
 		if (d==1) {
-			window.location.href=base+'/cath/show/'+patient_id;
+			window.location.href=base+'/patient/'+patient_id+'/cath';
 		}
 	});
 	
@@ -176,7 +176,7 @@ $(function(){
 		e.preventDefault();
 		var d=save_basal();
 		if (d==1) {
-			window.location.href=base+'/cath/show/'+patient_id;
+			window.location.href=base+'/patient/'+patient_id+'/cath';
 		}
 	});
 

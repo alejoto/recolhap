@@ -9,7 +9,11 @@
 </div>
 <div class="span5">
 	<div class="row">
-		<div class="span5"><b><a href="">{{$p->name}} {{$p->surn}}</a></b></div>
+		<div class="span5">
+			<b>
+				<a href="">
+					<span id='patient' class="muted">{{$p->patient_id}}</span>
+					{{$p->name}} {{$p->surn}}</a></b></div>
 	</div>
 	<div class="row">
 		<div class="span5"><a href="">edad {{$age}} a&ntilde;os</a></div>

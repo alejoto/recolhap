@@ -1,33 +1,41 @@
 <?php
 
-class RightcathController extends \BaseController {
 
-	public function getIndex () {
-		return 1;
+class RightcathController extends AgeController {
+	public function __construct(){
+		//$p=Patient::find($patient_id);
+		//$age=$this->age($p->birthd);
 	}
 
-	public function getPatient ($patient_id) {
+	/**
+	 * Display a listing of the resource.
+	 * GET /rightcath
+	 *
+	 * @return Response
+	 */
+	public function index($patient_id)
+	{
+		//$dates=new ManagingDates;
+		$p=Patient::find($patient_id);
+		$age=$this->age($p->birthd);
+
+		return View::make('rightcath.index',
+			compact(
+				'patient_id',
+				'p',
+				'age'
+				)
+			)
+		;
+	}
+
+	public function create($patient_id)
+	{
+		//$dates=new ManagingDates;
 		$p=Patient::find($patient_id);
 
-		$now=date('Y-m-d');
-		$thisyear=(int)substr($now,0,4);
-		$thismonth=substr($now,5,2);
-		$today=substr($now,8,2);
-		$this_month_and_day=$thismonth.$today;
-		$this_month_and_day=(int)$this_month_and_day;
+		$age=$this->age($p->birthd);
 
-		$birthdate=$p->birthd;
-		$birthyear=(int)substr($birthdate,0,4);
-		$birthmonth=substr($birthdate,5,2);
-		$birthday=substr($birthdate,8,2);
-		$birth_month_and_day=$birthmonth.$birthday;
-		$birth_month_and_day=(int)$birth_month_and_day;
-
-		if ($birth_month_and_day>$this_month_and_day) {
-			$age= $thisyear-$birthyear-1;
-		}  else {
-			$age=$thisyear-$birthyear;
-		}
 		return View::make(
 			'rightcath.create',
 			compact(
@@ -38,16 +46,16 @@ class RightcathController extends \BaseController {
 			)
 		;
 	}
+	//
 
-	public function getShow ($patient_id) {
-		return View::make('rightcath.show',
-			compact(
-				'patient_id'
-				)
-			);
-	}
-
-	public function postPatient () {
+	/**
+	 * Store a newly created resource in storage.
+	 * POST /rightcath
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
 		$patient_id=		Input::get('patient_id');
 		//
 		//$rt_cat_date=		Input::get('wholedate');
@@ -162,43 +170,6 @@ class RightcathController extends \BaseController {
 
 
 		return 1;
-	}
-
-	public function getCath ($cath) {
-		//
-	}
-
-	/**
-	 * Display a listing of the resource.
-	 * GET /rightcath
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /rightcath/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /rightcath
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
 	}
 
 	/**

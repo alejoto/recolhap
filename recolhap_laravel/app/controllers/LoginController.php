@@ -62,91 +62,7 @@ class LoginController extends \BaseController {
 			if (  Auth::attempt( $auth )  ) {
 				return 2;
 			}
-			/*$mail=array(
-				'recipient'	=>'alejoto@gmail.com',
-				'name'		=>'Alejandro Toro'
-				);
-
-			Mail::send(
-				'emails.test', 
-				array('key' => 'value'), 
-				function($message) use($mail) {
-					$message->to(
-						//'alejoto@gmail.com', 
-						$mail['recipient'],
-						$mail['name']
-						)
-					->subject(
-						'Welcome!'
-						)
-					;
-				}
-				)
-			;*/
-
-
-			/*$coord2='2.3';
-			$requester='4.3';
-			$tasks='t45.6';
-
-			$mssgdata=compact(
-				'coord2'     
-				,'requester'  
-				,'tasks'  
-				)
-			;
-
-			$subject='testing email data';
-
-			$coord='alejoto@gmail.com';
-			$name='Alejandro Toro';
-			$recolhap= 'suppor@recolhap.com';
-			$maildata=array(
-			    'recipient'		=>    $coord
-			   , 'r_name'		=>    $name
-			   , 'sender'		=>    $recolhap
-			   , 's_name'		=>    'Registro Recolhap'
-			   , 'subject'		=>    $subject
-			);
-			Mail::send( 'emails.test',   $mssgdata,  function($message) use ($maildata) {
-			    $message->to($maildata['recipient'],$maildata['r_name'])
-					->from($maildata['sender'],$maildata['s_name'])
-					->subject($maildata['subject']);
-			});*/
-
-			/*$mail='alejoto@gmail.com';
-			$subject='Collaborator left project';
-			$headers = "MIME-Version: 1.0" . "\r\n";
-			$headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
-			$headers .= 'From: no reply<support@recolhap.com>' . "\r\n";
-			$content=
-			'<html>'.
-				'<head>'.
-					'<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">'
-					.'<title></title>'.
-				'</head>'.
-				'<body>'.
-					'<h1>Por favor hacer click en el siguiente link para activar su clave</h1>'.
-				'</body>'.
-			'</html>';
-			mail(
-				$mail,
-				$subject,
-				$content,
-				$headers
-				)
-			;*/
 		}
-		//check if email already exists
-		/*city_recolhap
-		clinic_recolhap
-		ivt_name
-		ivt_surname
-		ivt_doc
-		ivt_specialty
-		ivt_mobile
-		mail
-		pwd1*/
 		
 	}
 	/**
@@ -179,7 +95,37 @@ class LoginController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$id=Input::get('docidnum');
+		$check=Patient::find($id);
+		if ($check!=null) {
+			return Redirect::to('patients/exists/');
+		} else {
+			//
+			$e=new Patient;
+			$e->patient_id	=Input::get('docidnum');
+			$e->name		=Input::get('name');
+			$e->surn		=Input::get('surname');
+			$e->gender		=Input::get('gender');
+			$e->birthd		=date(
+				'Y-m-d',mktime(
+					0,0,0,
+					Input::get('month'),
+					Input::get('day'),
+					Input::get('year')
+					)
+			)
+			;//$birthd	;
+			$e->countrybth	=Input::get('countrybth');
+			$e->citybth		=Input::get('citybth');
+			$e->statebth	=Input::get('statebth');
+			$e->digiter_id	=Auth::user()->email;
+			$e->save();
+
+			return Redirect::to(
+				'patients/patient/'.Input::get('docidnum')
+				)
+			;
+		}
 	}
 
 	/**

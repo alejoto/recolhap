@@ -96,9 +96,6 @@
 				<br>
 				<input class="input-large required_" id="pwd2" name="pwd2" type="password" placeholder="CONFIRMAR CONTRASE&Ntilde;A">
 				<br>
-				<div  id="loading_reg" style="display:none">
-					<img src="assets/images/ajax-loader.gif"/>
-				</div>
 				
 			</div>
 		</div>
@@ -113,6 +110,10 @@
       * js associated file:   login.js
       * php AJAX:             modules/register/ajax_register.php
   -->
+		
+		<div  id="loading_reg" style="display:none">
+			<img src="assets/images/ajax-loader.gif"/>
+		</div>
   		<a class="btn btn-primary" id="register_button" >Registrarse</a>
   		<a class="btn btn-info" data-dismiss="modal" aria-hidden="true" >Cerrar</a>
   	</div>

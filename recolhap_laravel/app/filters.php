@@ -43,6 +43,10 @@ Route::filter('noactiveyet',function(){
 	}
 });
 
+Route::filter('cath',function(){
+	//
+});
+
 Route::filter('page',function($route,$request){
 	if (null==($route->getParameter('page') )) {
 		return  Redirect::to('/');

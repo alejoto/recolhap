@@ -129,7 +129,7 @@ $(function(){
 			function(d){
 				//$('#accept_hospital').html(d);
 				if (d==1) {
-					window.location.href=base+'/patients';
+					window.location.href=base+'/search';
 				}
 			//
 			//$('#accept_hospital').html('1');

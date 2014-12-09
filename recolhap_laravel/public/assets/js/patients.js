@@ -48,6 +48,45 @@ $(document).ready(function() {
 	$("#docidnum").hide();
 	$('#male').hide();
 	$('#female').hide();
+
+	//saving new patient
+	$('#save_patient').click(function(e){
+		e.preventDefault();
+		var docidnum=	$('#docidnum').val();
+		var name=		$('#name').val();
+		var surname=	$('#surname').val();
+		var gender=		$('#gender').val();
+		var month=		$('#month').val();
+		var day=		$('#day').val();
+		var year=		$('#year').val();
+		var countrybth=	$('#countrybth').val();
+		var citybth=	$('#citybth').val();
+		var statebth=	$('#statebth').val();
+		var base=		$('#base').html();
+		$.post(
+			base+'/activehospital/patient',
+			{
+				docidnum:docidnum
+				,name:name
+				,surname:surname
+				,gender:gender
+				,month:month
+				,day:day
+				,year:year
+				,countrybth:countrybth
+				,citybth:citybth
+				,statebth:statebth
+			},
+			function(d){
+				if (d==2) {
+					window.location.href=base+'/activehospital/patient/'+docidnum;
+				} else if (d==1) {
+					window.location.href=base+'/activehospital/patient/'+docidnum;
+				}
+			}
+			)
+		;
+	});
 });
 
 
@@ -65,7 +104,7 @@ function enter_search (){
 
 		var base=$('#base').html();
 		$.post(
-			base+'/patients',
+			base+'/search',
 			//"ajax_search_patient.php",
 			{ doc:docidnum }, 
 			function(d) {
@@ -94,7 +133,7 @@ function enter_search (){
 					//$("a").attr("href", "http://www.google.com/")
 					$('#start_patient_register').attr(
 						'href',
-						base+'/patients/patient/'+d.patient_id
+						base+'/activehospital/patient/'+d.patient_id
 						)
 					;
 

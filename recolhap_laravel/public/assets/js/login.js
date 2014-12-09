@@ -81,7 +81,7 @@ $(function(){
 					{ usr:$('#usr').val(), pwd:$('#pwd').val() },
 					function(d) {
 						if(d==1) {
-							window.location.href=base+'/patients';
+							window.location.href=base+'/search';
 						} else if (d==2) {
 							window.location.href=base+'/accesslist';
 						} else { 
@@ -254,7 +254,7 @@ $(function(){
 								)
 							;
 						} else if (d==2) {
-							window.location.href=base+'/patients';
+							window.location.href=base+'/search';
 						}
 
 						$("#loading_reg").hide();

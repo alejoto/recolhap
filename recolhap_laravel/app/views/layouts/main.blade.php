@@ -35,8 +35,8 @@
 								Administrar usuarios
 								<i class="icon-wrench icon-white"></i>
 							</a>
-							@endif
-							<a href="{{URL::to('patients')}}" class="btn btn-inverse" id="change_patient_btn">
+							@endif 
+							<a href="{{URL::to('search')}}" class="btn btn-inverse" id="change_patient_btn">
 								Escoger paciente
 								<i class="icon-user icon-white"></i>
 							</a>
