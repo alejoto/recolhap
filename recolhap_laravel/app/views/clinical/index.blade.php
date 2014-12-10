@@ -48,13 +48,34 @@
 			<a href="{{URL::to('patient/'.$patient_id.'/hypercloating')}}" class='text-info'>Agregar</a>
 			@endif
 		</b>
-		
 	</div>
 </div>
 <div class="row">
 	<div class="span2">Tratamiento</div>
 	<div class="span4">
 		<a href="#treatments_table" class="text-info">Ir a tabla tratamientos</a>
+	</div>
+</div>
+<div class="row">
+	<div class="span2">Fallecido?</div>
+	<div class="span4">
+		@if($eval_outcome->count()==0)
+			<a href="{{URL::to('patient/'.$patient_id.'/outcome')}}" class="text-info">Agregar</a>
+		@else
+		<?php 
+		$d_cause=$eval_outcome->first()->outcome->dead_cause;
+		$cause='';
+		switch ($d_cause) {
+			case 'si_dom':$cause='muerte subita en domicilio';break;
+			case 'si_hosp':$cause='muerte por complicación HAP en hospital';break;
+			case 'si_dom':$cause='muerte no asociada a HAP';break;
+		}
+		?>
+			Fallece: {{$cause}}
+			<br>
+			Fecha: {{$d_cause=$eval_outcome->first()->outcome->dead_date}}
+		@endif
+		
 	</div>
 </div>
 <hr>
@@ -153,14 +174,81 @@
 </table>
 <div id="treatments_table">
 	<h3>Historial de tratamientos médicos y quirúrgicos</h3>
-	<a href="{{URL::to('patient/'.$patient_id.'/treatment')}}" class="text-info">Agregar manejo</a>
+	<a href="{{URL::to('patient/'.$patient_id.'/treatment')}}" class="text-info">
+		Agregar manejo - medicamento y / o cirugía - 
+	</a>
 	<table class="table table-hover">
 		<tr>
-			<th>Tipos de manejo</th>
+			<th>Medicamento</th>
 			<th>Fecha inicio</th>
 			<th>Fecha finalización</th>
 			<th>Observaciones</th>
 		</tr>
+		@if($eval_treatment->count()>0)
+			@foreach($eval_treatment->get() as $e)
+			<?php 
+			$d=$e->drugqtreatment;
+			?>
+			<tr>
+				<td>
+					{{$d->drug}}
+				</td>
+				<td>
+					{{$d->drug_ini}}
+				</td>
+				<td>
+					{{$d->drug_end}}
+				</td>
+				<td>
+					{{$d->suspend_cause}}
+				</td>
+			</tr>
+				
+			@endforeach
+		@endif
+	</table>
+	<table class="table table-hover">
+		<tr>
+			<th>cirugía</th>
+			<th>Fecha realización</th>
+		</tr>
+		@if($eval_treatment->count()>0)
+			@foreach($eval_surgery->get() as $e)
+				<?php 
+				$s=$e->surgical;
+				?>
+				@if($s->surgical_date!=null)
+					<tr>
+						<td>
+							Transplante {{$s->surgical_type}}
+						</td>
+						<td>
+							{{$s->surgical_date}}
+						</td>
+					</tr>
+				@endif
+				@if($s->surgical_tendt_date!=null)
+					<tr>
+						<td>
+							Trombarterectomia
+						</td>
+						<td>
+							{{$s->surgical_tendt_date}}
+						</td>
+					</tr>
+				@endif
+				@if($s->surgical_atr_date!=null)
+					<tr>
+						<td>
+							Atrioseptostomía
+						</td>
+						<td>
+							{{$s->surgical_atr_date}}
+						</td>
+					</tr>
+				@endif
+			@endforeach
+		@endif
 	</table>
 </div>
 

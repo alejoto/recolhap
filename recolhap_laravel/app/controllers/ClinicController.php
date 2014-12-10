@@ -45,6 +45,16 @@ class ClinicController extends AgeController {
 			$value=explode('|',$value);
 			$hyperclot[$key]=$value;
 		}
+
+		$eval_treatment=Evaluation::where('patient_id','=',$patient_id)
+		->has('drugqtreatment');
+
+		$eval_surgery=Evaluation::where('patient_id','=',$patient_id)
+		->has('surgical');
+
+		$eval_outcome=Evaluation::where('patient_id','=',$patient_id)
+		->has('outcome');
+		//
 		$p=Patient::find($patient_id);
 		$age=$this->age($p->birthd);
 		return View::make(
@@ -60,7 +70,10 @@ class ClinicController extends AgeController {
 				'dxtype',
 				'followup',
 				'eval_hyperclott',
-				'hyperclot'
+				'hyperclot',
+				'eval_outcome',
+				'eval_treatment',
+				'eval_surgery'
 				)
 			)
 		;
@@ -456,52 +469,57 @@ class ClinicController extends AgeController {
 		//
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($patient_id,$id)
-	{
-		//
+	public function outcome ($patient_id) {
+		$p=Patient::find($patient_id);
+		$age=$this->age($p->birthd);
+		$eval_outcome=Evaluation::where('patient_id','=',$patient_id)
+		->has('outcome');
+		if ($eval_outcome->count()==0) {
+			return View::make(
+				'clinical.outcome',
+				compact(
+					'p',
+					'age',
+					'patient_id'
+					)
+				)
+			;
+		} else {
+			return Redirect::to('patient/'.$patient_id.'/clinic');
+		}
+		
+			
 	}
 
+	public function saveoutcome ($patient_id) {
+		$patient=Input::get('patient');
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($patient_id,$id)
-	{
-		//
-	}
+		$eval_outcome=Evaluation::where('patient_id','=',$patient_id)
+		->has('outcome');
+		if ($eval_outcome->count()==0) {
+			$dead_cause=Input::get('dead_cause');
 
+			$dead_date=Input::get('year_death').'-'.
+			Input::get('month_death').'-'.
+			Input::get('day_death');
+			Input::get('dead_date');
+			//
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($patient_id,$id)
-	{
-		//
-	}
+			$e=new Evaluation;
+			$e->patient_id=$patient;
+			$e->digiter_id=Auth::user()->email;
+			$e->save();
+			$e_id=$e->eval_id;
 
+			$o=new Outcome;
+			$o->dead_date	=$dead_date;
+			$o->dead_cause	=$dead_cause;
+			$o->eval_id		=$e_id;
+			$o->save();
+		}
+			
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($patient_id,$id)
-	{
-		//
+		return 1;
 	}
 
 

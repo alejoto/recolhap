@@ -30,7 +30,7 @@ hide_show_savebutton([$("#pulse"),$("#breathing"),$("#psist"),$("#pdiast")], $("
 
 //hide_show_savebutton([$("#drug"),$("#year_ini_d"),$("#month_ini_d"),$("#day_ini_d")], $("#save_cancel_drug"));
 
-hide_show_savebutton([$("#year_death"),$("#month_death"),$("#day_death"),$("#dead_cause")], $("#outcome_save"));
+//hide_show_savebutton([$("#year_death"),$("#month_death"),$("#day_death"),$("#dead_cause")], $("#outcome_save"));
 
 
 
@@ -860,7 +860,7 @@ hmd_dateformat($("#year_transp"),$("#month_transp"),$("#day_transp"));
 
 hmd_dateformat($("#year_atr"),$("#month_atr"),$("#day_atr"));
 
-hmd_dateformat($("#year_death"),$("#month_death"),$("#day_death"));
+//hmd_dateformat($("#year_death"),$("#month_death"),$("#day_death"));
 
 
 
@@ -908,7 +908,7 @@ num_ranges($("#year_transp"), d.getFullYear(), 1990,0);
 
 num_ranges($("#year_atr"), d.getFullYear(), 1990,0);
 
-num_ranges($("#year_death"), d.getFullYear(), 1990,0);
+//num_ranges($("#year_death"), d.getFullYear(), 1990,0);
 
 
 
