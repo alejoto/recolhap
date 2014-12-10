@@ -54,6 +54,7 @@ Route::group(
 						Route::get('patient/{patient}/outcome','ClinicController@outcome');
 						Route::post('patient/{patient}/outcome','ClinicController@saveoutcome');
 						Route::resource('patient.blood','BloodController');
+						Route::post('patient/{patient}/saveblood','BloodController@saveblood');
 						Route::resource('patient.imaging','ImagingController');
 						Route::resource('patient.performance','PerformanceController');
 					}

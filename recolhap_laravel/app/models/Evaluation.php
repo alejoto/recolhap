@@ -29,10 +29,6 @@ class Evaluation extends \Eloquent {
 		return $this->hasOne('Cpqstressqtest','eval_id','eval_id');
 	}
 	
-	public function dimerqtrop() {
-		return $this->hasOne('Dimerqtrop','eval_id','eval_id');
-	}
-	
 	public function drugqtreatment() {
 		return $this->hasOne('Drugqtreatment','eval_id','eval_id');
 	}
