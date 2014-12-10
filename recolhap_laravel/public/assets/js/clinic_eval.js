@@ -856,7 +856,7 @@ hmd_dateformat($("#year_end_d"),$("#month_end_d"),$("#day_end_d"));
 
 hmd_dateformat($("#year_transp"),$("#month_transp"),$("#day_transp"));
 
-hmd_dateformat($("#year_tendt"),$("#month_tendt"),$("#day_tendt"));
+//hmd_dateformat($("#year_tendt"),$("#month_tendt"),$("#day_tendt"));
 
 hmd_dateformat($("#year_atr"),$("#month_atr"),$("#day_atr"));
 
@@ -904,7 +904,7 @@ num_ranges($("#year_end_d"), d.getFullYear(), 1990,0);
 
 num_ranges($("#year_transp"), d.getFullYear(), 1990,0);
 
-num_ranges($("#year_tendt"), d.getFullYear(), 1990,0);
+//num_ranges($("#year_tendt"), d.getFullYear(), 1990,0);
 
 num_ranges($("#year_atr"), d.getFullYear(), 1990,0);
 

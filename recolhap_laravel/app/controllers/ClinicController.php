@@ -182,15 +182,38 @@ class ClinicController extends AgeController {
 	public function treatment ($patient_id) {
 		$eval_treatment=Evaluation::where('patient_id','=',$patient_id)
 		->has('drugqtreatment');
-		//$treatment='';
+
+		$eval_surgery=Evaluation::where('patient_id','=',$patient_id)
+		->has('surgical');
+
+		$transplant=0;
+		$tart=0;
+		$atro=0;
+		
+		if ($eval_surgery->count()>0) {
+			$s=$eval_surgery->first()->surgical;
+			if ($s->surgical_date!=null) {
+				$transplant=1;
+			}
+			if ($s->surgical_tendt_date!=null) {
+				$tart=1;
+			}
+			if ($s->surgical_atr_date!=null) {
+				$atro=1;
+			}
+		}
 		$p=Patient::find($patient_id);
 		$age=$this->age($p->birthd);
 		return View::make('clinical.treatment',
 			compact(
 				'eval_treatment',
+				'eval_surgery',
 				'patient_id',
 				'p',
-				'age'
+				'age',
+				'transplant',
+				'tart',
+				'atro'
 				)
 			)
 		;
@@ -208,7 +231,11 @@ class ClinicController extends AgeController {
 			$q->whereDrug($drug);
 		});
 
-		if ($eval_treatment->count()==0) {
+		$pleasesave=0;
+		if ($eval_treatment->count()==0) { $pleasesave=1; }
+		if ($eval_treatment->count()>0&&$confirm=='yes') { $pleasesave=1; }
+
+		if ($pleasesave==1) {
 			$e=new Evaluation;
 			$e->patient_id=$patient_id;
 			$e->digiter_id=Auth::user()->email;
@@ -238,6 +265,68 @@ class ClinicController extends AgeController {
 		$d->drug_end 		= $drug_end;
 		$d->save();
 
+		return 1;
+	}
+
+	public function surgical ($patient_id) {
+		$eval_surgery=Evaluation::where('patient_id','=',$patient_id)
+		->has('surgical');
+
+		$surgical_type=null;
+		$surgical_date=null;
+		$surgical_tendt_date=null;
+		$surgical_atr_date=null;
+		//
+		//$surgical_type=Input::get('surgical_type');
+		if (Input::get('surgical_type')!='') {
+			$surgical_type=Input::get('surgical_type');
+		}
+
+		if (Input::get('day_transp')!='') {
+			$surgical_date=
+			Input::get('year_transp').'-'.
+			Input::get('month_transp').'-'.
+			Input::get('day_transp');
+		}
+
+		if (Input::get('day_tendt')!='') {
+			$surgical_tendt_date=
+			Input::get('year_tendt').'-'.
+			Input::get('month_tendt').'-'.
+			Input::get('day_tendt');
+		}
+
+		if (Input::get('day_atr')!='') {
+			$surgical_atr_date=
+			Input::get('year_atr').'-'.
+			Input::get('month_atr').'-'.
+			Input::get('day_atr');
+		}
+
+		if ($eval_surgery->count()==0 ) {
+			$e=new Evaluation;
+			$e->patient_id=$patient_id;
+			$e->digiter_id=Auth::user()->email;
+			$e->save();
+			$e_id=$e->eval_id;
+
+			$s=new Surgical;
+			$s->surgical_type=$surgical_type;
+			$s->surgical_date=$surgical_date;
+			$s->surgical_tendt_date=$surgical_tendt_date;
+			$s->surgical_atr_date=$surgical_atr_date;
+			$s->eval_id=$e_id;
+			$s->save();
+		}
+		else {
+			$id=$eval_surgery->first()->surgical->surgical_id;
+			$s=Surgical::find($id);
+			if ($surgical_type!=null) {$s->surgical_type=$surgical_type; }
+			if ($surgical_date!=null) {$s->surgical_date=$surgical_date; }
+			if ($surgical_tendt_date!=null) {$s->surgical_tendt_date=$surgical_tendt_date; }
+			if ($surgical_atr_date!=null) {$s->surgical_atr_date=$surgical_atr_date; }
+			$s->save();
+		}
 		return 1;
 	}
 

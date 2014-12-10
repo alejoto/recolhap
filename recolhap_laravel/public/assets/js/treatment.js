@@ -7,6 +7,11 @@ $(function(){
 	$(".alert").hide(); 
 	$('.drug_suspension_update').hide();
 	$('.susp_date').hide();
+	$('#drug_already_exist').hide();
+	$("#treatment_save").hide();
+	$("#year_tendt").hide();
+	$("#tendt_hide").hide();
+	$("#atr_sept_hide").hide();
 
 	$('#ad_drug').click(function(e){
 		e.preventDefault();
@@ -77,7 +82,17 @@ $(function(){
 					drugdate:drugdate
 				},
 				function(d){
-					$('#btn_add_drug').html(d);
+					if (d==2) {
+						$('#drug_already_exist').show('fast');
+						$('#inputdrug').hide('fast');
+						//
+					} else {
+						window.location.reload();
+					}
+					/*if (d==2) {
+						$('#drug_already_exist').show('fast');
+					}*/
+					//$('#btn_add_drug').html(d);
 				}
 				)
 			;
@@ -97,13 +112,19 @@ $(function(){
 
 	$('#cancel_duplicated_drug').click(function(e){
 		e.preventDefault();
-		$('#inputdrug').hide();
+		$('#inputdrug').hide('fast');
+		$('#inputdrug').show('fast');
 		$("#ad_drug").html("A&ntilde;adir f&aacute;rmaco");
 		$('#drug').val('');
 		$('#year_ini_d').val('');
 		$('#month_ini_d').val('');
 		$('#day_ini_d').val('');
 		$('#drug_already_exist').hide();
+	});
+
+	$('#reconfirm_drugsave').click(function(){
+		var confirm='yes';
+		enter_drug_toDB(confirm);
 	});
 
 	function update_inline() {
@@ -197,10 +218,128 @@ $(function(){
 	}
 	
 
+
+
+	$("#transplant").change(function(){
+		if ($("#transplant").val()==""){
+			$("#treatment_save").hide('fast');
+		}else if ($("#transplant").val()=="en espera"){
+			$("#treatment_save").show('fast');
+		}
+
+		if ($("#transplant").val()=="pulmon"||$("#transplant").val()=="corazon pulmon") {
+			$("#year_transp").show("fast");
+			if($("#year_transp").val() == ""){
+				hide_show_savebutton([$("#year_transp"),$("#month_transp"),$("#day_transp")], $("#treatment_save"));
+			}
+		} else {
+			$("#year_transp").hide("fast");
+			$("#year_transp").val("");
+			$("#month_transp").hide("fast");
+			$("#month_transp").val("");
+			$("#day_transp").hide("fast");
+			$("#day_transp").val("");
+		}
+
+	});
+
+	$("#tendt").change(function(){
+		if (this.checked ){
+			$('#year_tendt').show('fast');
+			$("#tendt_hide").show('fast');
+			hide_show_savebutton([$("#year_tendt"),$("#month_tendt"),$("#day_tendt")], $("#treatment_save"));
+		} else {
+			$('#year_tendt').val('');
+			$('#day_tendt').val('');
+			$('#month_tendt').val('');
+			$('#month_tendt').hide('fast');
+			$('#day_tendt').hide('fast');
+			$("#tendt_hide").hide('fast');
+			if($("#day_transp").val() != "" || $("#transplant").val()=="en espera"){
+				$("#treatment_save").show('fast');
+			}else{
+				$("#treatment_save").hide('fast');
+			}
+		}
+	});
+	$("#atr_sept").change(function(){
+		if (this.checked){
+			$("#atr_sept_hide").show('fast');
+			hide_show_savebutton([$("#year_atr"),$("#month_atr"),$("#day_atr")], $("#treatment_save"));
+		}
+		else{
+			$('#year_atr').val('');
+			$('#day_atr').val('');
+			$('#month_atr').val('');
+			$('#month_atr').hide('');
+			$('#day_atr').hide('');
+			$("#atr_sept_hide").hide('fast');
+			if($("#day_transp").val() != "" || $("#transplant").val()=="en espera"){
+				$("#treatment_save").show('fast');
+			}else{
+				$("#treatment_save").hide('fast');
+			}
+		}
+	});
+
 	hmd_dateformat($("#year_ini_d"),$("#month_ini_d"),$("#day_ini_d"));
+	hmd_dateformat($("#year_transp"),$("#month_transp"),$("#day_transp"));
+	hmd_dateformat($("#year_tendt"),$("#month_tendt"),$("#day_tendt"));
+	hmd_dateformat($("#year_atr"),$("#month_atr"),$("#day_atr"));
+
 
 	var d = new Date(); /* Used to calculate the actual year */
 	num_ranges($("#year_ini_d"), d.getFullYear(), 1990,0);
+	num_ranges($("#year_transp"), d.getFullYear(), 1990,0);
+	num_ranges($("#year_tendt"), d.getFullYear(), 1990,0);
+	num_ranges($("#year_atr"), d.getFullYear(), 1990,0);
+
+	$("#treatment_save").click(function(){
+		//transplant type
+		var surgical_type=$('#transplant').val();
+		//
+		//date of lung transplant
+		var year_transp=$('#year_transp').val();
+		var month_transp=$('#month_transp').val();
+		var day_transp=$('#day_transp').val();
+		//concatenated date
+		var surgical_date=year_transp+'-'+month_transp+'-'+day_transp;
+		//
+		//tromboendarterectomy date
+		var year_tendt=$('#year_tendt').val();
+		var month_tendt=$('#month_tendt').val();
+		var day_tendt=$('#day_tendt').val();
+		//concatenated trombendarterectomy date
+		var surgical_tendt_date=year_tendt+'-'+month_tendt+'-'+day_tendt;
+		//
+		var year_atr=$('#year_atr').val();
+		var month_atr=$('#month_atr').val();
+		var day_atr=$('#day_atr').val();
+		var surgical_atr_date=year_atr+'-'+month_atr+'-'+day_atr;
+		var patient=$('#patient').html();
+		var base=$('#base').html();
+		$.post(
+			base+'/patient/'+patient+'/surgical',
+			{
+				surgical_type:surgical_type,
+				year_transp:year_transp,
+				month_transp:month_transp,
+				day_transp:day_transp,
+				year_tendt:year_tendt,
+				month_tendt:month_tendt,
+				day_tendt:day_tendt,
+				year_atr:year_atr,
+				month_atr:month_atr,
+				day_atr:day_atr
+			},
+			function(d){
+				window.location.reload();
+				//$("#treatment_save").html(d);
+			}
+			)
+		;
+	});
+
 
 
 });
