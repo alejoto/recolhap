@@ -28,7 +28,7 @@ hide_show_savebutton([$("#y_vih"),$("#m_vih"),$("#d_vih"), $("#hiv_result")], $(
 
 hide_show_savebutton([$("#y_art_gas"),$("#m_art_gas"),$("#d_art_gas"), $("#bld_gass_fio2"), $("#bld_gass_ph"), $("#bld_gass_paco2"), $("#bld_gass_pao2"), $("#bld_gass_hco3")], $("#bld_gass_save"));
 
-hide_show_savebutton([$("#y_renal"),$("#m_renal"),$("#d_renal"), $("#creat"), $("#bun")], $("#renal_save"));
+hide_show_savebutton([$("#y_renal"),$("#m_renal"),$("#d_renal"), $("#creat")], $("#renal_save"));
 
 hide_show_savebutton([$("#y_liver"),$("#m_liver"),$("#d_liver"), $("#hep_ast"), $("#hep_alt"), $("#hep_fal")], $("#liver_save"));
 
@@ -358,6 +358,21 @@ num_ranges($("#hep_inr"), 999999, 0, 1);
 
 
 $(function(){
+
+  function saveblood(values){
+    var base=$('#base').html();
+    var patient=$('#patient').html();
+    $.post(
+      base+'/patient/'+patient+'/saveblood',
+      values,
+      function(d){
+        if (d==1) {
+          window.location.href=base+'/patient/'+patient+'/blood';
+        }
+      }
+      )
+    ;
+  }
   var base=$('#base').html();
   var patient=$('#patient').html();
 
@@ -369,15 +384,7 @@ $(function(){
     var hb_value=$('#hb_value').val();
     var values={patient:patient,date:date,hb_value:hb_value
       ,model:'Hb'};
-    $.post(
-      base+'/patient/'+patient+'/saveblood',
-      values,
-      function(d){
-        if (d==1) {
-          window.location.href=base+'/patient/'+patient+'/blood';
-        }
-      
-    });
+    saveblood(values);
   });
 
 
@@ -389,15 +396,7 @@ $(function(){
     var d_dimer_value=$('#d_dimer_value').val();
     var values={patient:patient,date:date,d_dimer_value:d_dimer_value
       ,model:'Hemoqdim' };
-    $.post(
-      base+'/patient/'+patient+'/saveblood',
-      values,
-      function(d){
-        if (d==1) {
-          window.location.href=base+'/patient/'+patient+'/blood';
-        }
-      
-    });
+    saveblood(values);
    });
 
 
@@ -419,15 +418,7 @@ $(function(){
       ,t_4_free:t_4_free
       ,model:'Hemoqthyro'
       };
-    $.post(
-      base+'/patient/'+patient+'/saveblood',
-      values,
-      function(d){
-        if (d==1) {
-          window.location.href=base+'/patient/'+patient+'/blood';
-        }
-      
-    });
+    saveblood(values);
    });
 
 
@@ -444,15 +435,7 @@ $(function(){
     var trop_result=$('#trop_result').val();
     var values={patient:patient,date:date,trop_result:trop_result
       ,model:'Hemoqtropo'};
-    $.post(
-      base+'/patient/'+patient+'/saveblood',
-      values,
-      function(d){
-        if (d==1) {
-          window.location.href=base+'/patient/'+patient+'/blood';
-        }
-      
-    });
+    saveblood(values);
    });
 
 
@@ -469,15 +452,7 @@ $(function(){
     var values={patient:patient,date:date,pep_natr_value:pep_natr_value
       ,pro_pep_natr_value:pro_pep_natr_value
       ,model:'Pepqnatr'};
-    $.post(
-      base+'/patient/'+patient+'/saveblood',
-      values,
-      function(d){
-        if (d==1) {
-          window.location.href=base+'/patient/'+patient+'/blood';
-        }
-      
-    });
+    saveblood(values);
    });
 
 
@@ -490,15 +465,240 @@ $(function(){
     var hiv_result=$('#hiv_result').val();
     var values={patient:patient,date:date,hiv_result:hiv_result
       ,model:'Vih'}
-    $.post(
-      base+'/patient/'+patient+'/saveblood',
-      values,
-      function(d){
-        if (d==1) {
-          window.location.href=base+'/patient/'+patient+'/blood';
-        }
-        
-    });
+    saveblood(values);
    });
+
+  $('#bld_gass_save').click(function(e){ e.preventDefault(); 
+    var y_art_gas=$('#y_art_gas').val();
+    var m_art_gas=$('#m_art_gas').val();
+    var d_art_gas=$('#d_art_gas').val();
+
+    var date=y_art_gas+'-'+m_art_gas+'-'+d_art_gas;
+    var bld_gass_fio2=$('#bld_gass_fio2').val();
+    var bld_gass_ph=$('#bld_gass_ph').val();
+    var bld_gass_paco2=$('#bld_gass_paco2').val();
+    var bld_gass_pao2=$('#bld_gass_pao2').val();
+    var bld_gass_hco3=$('#bld_gass_hco3').val();
+    var values={patient:patient,date:date,bld_gass_fio2:bld_gass_fio2
+    ,bld_gass_ph:bld_gass_ph
+    ,bld_gass_paco2:bld_gass_paco2
+    ,bld_gass_pao2:bld_gass_pao2
+    ,bld_gass_hco3:bld_gass_hco3
+    ,model:'Arterialgasses'};
+    saveblood(values);
+
+
+
+  });
+
+
+  $('#liver_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_liver=$('#y_liver').val();
+    var m_liver=$('#m_liver').val();
+    var d_liver=$('#d_liver').val();
+    var date=y_liver+'-'+m_liver+'-'+d_liver;
+    var hep_albumin=$('#hep_albumin').val();
+    var hep_ast=$('#hep_ast').val();
+    var hep_alt=$('#hep_alt').val();
+    var hep_fal=$('#hep_fal').val();
+    var hep_ggt=$('#hep_ggt').val();
+    var bili_tot=$('#bili_tot').val();
+    var bili_dir=$('#bili_dir').val();
+    var values={patient:patient,date:date,hep_albumin:hep_albumin
+    ,hep_ast:hep_ast
+    ,hep_alt:hep_alt
+    ,hep_fal:hep_fal
+    ,hep_ggt:hep_ggt
+    ,bili_tot:bili_tot
+    ,bili_dir:bili_dir
+    ,model:'Hepatic'};
+    saveblood(values);
+
+
+
+  });
+
+
+  $('#renal_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_renal=$('#y_renal').val();
+    var m_renal=$('#m_renal').val();
+    var d_renal=$('#d_renal').val();
+    var date=y_renal+'-'+m_renal+'-'+d_renal;
+    var creat=$('#creat').val();
+    var bun=$('#bun').val();
+    var values={patient:patient,date:date,creat:creat
+    ,bun:bun
+    ,model:'Renal'};
+    saveblood(values);
+
+
+
+  });
+
+
+  $('#f_reum_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_f_reum=$('#y_f_reum').val();
+    var m_f_reum=$('#m_f_reum').val();
+    var d_f_reum=$('#d_f_reum').val();
+    var date=y_f_reum+'-'+m_f_reum+'-'+d_f_reum;
+    var f_reum=$('#f_reum').val();
+    var values={patient:patient,date:date,f_reum:f_reum
+    ,model:'Reuma'};
+    saveblood(values);
+
+
+
+  });
+
+
+  $('#uns_ana_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_uns_ana=$('#y_uns_ana').val();
+    var m_uns_ana=$('#m_uns_ana').val();
+    var d_uns_ana=$('#d_uns_ana').val();
+    var date=y_uns_ana+'-'+m_uns_ana+'-'+d_uns_ana;
+    var uns_ana_value=$('#uns_ana_value').val();
+    var values={patient:patient,date:date,uns_ana_value:uns_ana_value
+    ,model:'Reumaqana'};
+    saveblood(values);
+
+
+
+  });
+
+
+  $('#anca_ab_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_anca_ab=$('#y_anca_ab').val();
+    var m_anca_ab=$('#m_anca_ab').val();
+    var d_anca_ab=$('#d_anca_ab').val();
+    var date=y_anca_ab+'-'+m_anca_ab+'-'+d_anca_ab;
+    var c_anca=$('#c_anca').val();
+    var p_anca=$('#p_anca').val();
+    var values={patient:patient,date:date,c_anca:c_anca
+    ,p_anca:p_anca
+    ,model:'Reumaqanca'};
+    saveblood(values);
+
+
+
+  });
+
+
+  $('#anti_ph_lip_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_anti_ph_lip=$('#y_anti_ph_lip').val();
+    var m_anti_ph_lip=$('#m_anti_ph_lip').val();
+    var d_anti_ph_lip=$('#d_anti_ph_lip').val();
+    var date=y_anti_ph_lip+'-'+m_anti_ph_lip+'-'+d_anti_ph_lip;
+    var acl_g=$('#acl_g').val();
+    var acl_m=$('#acl_m').val();
+    var a_coag_lup=$('#a_coag_lup').val();
+    var anti_b2gp=$('#anti_b2gp').val();
+    var values={patient:patient,date:date,acl_g:acl_g
+    ,acl_m:acl_m
+    ,a_coag_lup:a_coag_lup
+    ,anti_b2gp:anti_b2gp
+    ,model:'Reumaqantilip'};
+    saveblood(values);
+
+
+
+  });
+
+  $('#citrul_ab_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_citrul_ab=$('#y_citrul_ab').val();
+    var m_citrul_ab=$('#m_citrul_ab').val();
+    var d_citrul_ab=$('#d_citrul_ab').val();
+    var date=y_citrul_ab+'-'+m_citrul_ab+'-'+d_citrul_ab;
+    var a_citrul=$('#a_citrul').val();
+    var values={patient:patient,date:date,a_citrul:a_citrul
+    ,model:'Reumaqcitrul'};
+    saveblood(values);
+
+
+
+  });
+
+
+
+
+  $('#anti_ENAs_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_anti_ENAs=$('#y_anti_ENAs').val();
+    var m_anti_ENAs=$('#m_anti_ENAs').val();
+    var d_anti_ENAs=$('#d_anti_ENAs').val();
+    var date=y_anti_ENAs+'-'+m_anti_ENAs+'-'+d_anti_ENAs;
+    var anti_ro=$('#anti_ro').val();
+    var anti_la=$('#anti_la').val();
+    var anti_smith=$('#anti_smith').val();
+    var anti_rnp=$('#anti_rnp').val();
+    var antiRNP70=$('#antiRNP70').val();
+    var anti_u3_rnp=$('#anti_u3_rnp').val();
+    var antijo=$('#antijo').val();
+    var anti_scl=$('#anti_scl').val();
+    var values={patient:patient,date:date,anti_ro:anti_ro
+    ,anti_la:anti_la
+    ,anti_smith:anti_smith
+    ,anti_rnp:anti_rnp
+    ,antiRNP70:antiRNP70
+    ,anti_u3_rnp:anti_u3_rnp
+    ,antijo:antijo
+    ,anti_scl:anti_scl
+    ,model:'Reumaqenas'};
+    saveblood(values);
+
+
+
+  });
+
+
+  $('#sp_ana_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_sp_ana=$('#y_sp_ana').val();
+    var m_sp_ana=$('#m_sp_ana').val();
+    var d_sp_ana=$('#d_sp_ana').val();
+    var date=y_sp_ana+'-'+m_sp_ana+'-'+d_sp_ana;
+    var centromere=$('#centromere').val();
+    var anti_rna_polim=$('#anti_rna_polim').val();
+    var antidsDNA=$('#antidsDNA').val();
+    var values={patient:patient,date:date,centromere:centromere
+    ,anti_rna_polim:anti_rna_polim
+    ,antidsDNA:antidsDNA
+    ,model:'Reumaqspana'};
+    saveblood(values);
+
+
+
+  });
+
+
+  $('#bleed_save').click(function(e){ e.preventDefault(); 
+    //
+    var y_bleed=$('#y_bleed').val();
+    var m_bleed=$('#m_bleed').val();
+    var d_bleed=$('#d_bleed').val();
+    var date=y_bleed+'-'+m_bleed+'-'+d_bleed;
+    var hep_tpt=$('#hep_tpt').val();
+    var hep_tp=$('#hep_tp').val();
+    var hep_inr=$('#hep_inr').val();
+    var values={patient:patient,date:date,hep_tpt:hep_tpt
+    ,hep_tp:hep_tp
+    ,hep_inr:hep_inr
+    ,model:'Coag'};
+    saveblood(values);
+
+
+
+
+
+  });
+
+
+
 
 });
