@@ -53,6 +53,8 @@
 					<option value="Treprostinil">Treprostinil</option>
 					<option value="Tadalafil">Tadalafil</option>
 					<option value="Sildenafil">Sildenafil</option>
+					<option value="Macitentan">Macitentan</option>
+					<option value="Selexipag">Selexipag</option>
 					<option value="Iloprost">Iloprost</option>
 					<option value="Bosentan">Bosentan</option>
 					<option value="Ambrisentan">Ambrisentan</option>
